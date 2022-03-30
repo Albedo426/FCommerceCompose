@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable-v24/ic_baseline_account_circle_24.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable-v24/ic_baseline_category_24.xml" value="0.203125" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable-v24/ic_baseline_favorite_24.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable-v24/ic_baseline_shopping_cart_24.xml" value="0.203125" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.203125" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable-v24/product_item_discount_rate_hr.xml" value="0.203125" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.20729166666666668" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable/ic_baseline_chat_24.xml" value="0.12685185185185185" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable/ic_baseline_comment_24.xml" value="0.225" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.12685185185185185" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.225" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable/ic_baseline_item_favorite_24.xml" value="0.14114583333333333" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable/ic_baseline_mail_outline_24.xml" value="0.14114583333333333" />
+        <entry key="..\:/Users/fatik/AndroidStudioProjects/Staj/FCommerceCompose/app/src/main/res/drawable/ic_baseline_star_border_24.xml" value="0.22135416666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_14_PREVIEW" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
