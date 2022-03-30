@@ -11,6 +11,9 @@ data class CommentProductModel(
     var productMinDeclaration: String="",
     var coverImagePath: String="",
 
+    var productPrice: Double=0.0,
+    var productDiscountRate: Int=0,
+
     var orderStatus: Int=0,
     var orderDate: String="",
     var orderId: Int=0,

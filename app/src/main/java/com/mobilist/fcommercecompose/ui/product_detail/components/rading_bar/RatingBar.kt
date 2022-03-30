@@ -25,7 +25,10 @@ fun RatingBar(
     modifier: Modifier = Modifier,
     rating: Int,
     clickable:Boolean=true,
-    animate:Boolean=true
+    animate:Boolean=true,
+    animateStartSize:Int=30,
+    animateFinishSize:Int=15,
+    onClick: (Int) -> Unit = {}
 ) {
     var ratingState by remember {
         mutableStateOf(rating)
@@ -37,9 +40,9 @@ fun RatingBar(
 
     val size by animateDpAsState(
         targetValue=if(animate){
-              if (selected) 30.dp else 15.dp
+              if (selected) animateStartSize.dp else animateFinishSize.dp
         }else{
-             if (selected) 15.dp else 15.dp
+             if (selected) animateFinishSize.dp else animateFinishSize.dp
         },spring(Spring.DampingRatioMediumBouncy)
     )
 
@@ -61,6 +64,7 @@ fun RatingBar(
                                 MotionEvent.ACTION_DOWN -> {
                                     selected = true
                                     ratingState = i
+                                    onClick(i)
                                 }
                                 MotionEvent.ACTION_UP -> {
                                     selected = false

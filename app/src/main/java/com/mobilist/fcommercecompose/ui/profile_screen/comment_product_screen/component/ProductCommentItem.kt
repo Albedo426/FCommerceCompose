@@ -46,8 +46,8 @@ fun ProductCommentItem(navController: NavController, item: CommentProductModel) 
                 Image(
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .width(200.dp)
-                        .height(190.dp)
+                        .width(190.dp)
+                        .height(170.dp)
                         .clickable {
                             // navController.navigate("detail_product_screen/${item.UUID}")
                         },
@@ -57,7 +57,7 @@ fun ProductCommentItem(navController: NavController, item: CommentProductModel) 
                 Column(
                     verticalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier.fillMaxWidth()
-                        .height(190.dp)
+                        .height(170.dp)
                         .padding(8.dp)
                 ) {
                     Column() {
@@ -85,7 +85,7 @@ fun ProductCommentItem(navController: NavController, item: CommentProductModel) 
                     BasicButton(text ="Değerlendir", modifier= Modifier
                         .padding(5.dp)
                         .fillMaxWidth() ){
-                        
+                        navController.navigate("comment_add_screen/${item.productId}")
                     }
                 }
             }

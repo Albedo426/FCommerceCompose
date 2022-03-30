@@ -57,7 +57,7 @@ fun ItemTopAttr(viewModel: ProductDetailViewModel = hiltViewModel()) {
             ) {
 
                 Text(
-                    text = score.toString(),
+                    text ="%.2f".format(score) ,
                     modifier = Modifier
                         .wrapContentWidth(),
                     textAlign = TextAlign.Start,

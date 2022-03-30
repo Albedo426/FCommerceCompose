@@ -3,6 +3,7 @@ package com.mobilist.fcommercecompose.services.room.product_api
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.mobilist.fcommercecompose.data.entity.informative.Comment
 import com.mobilist.fcommercecompose.data.entity.informative.Like
 import com.mobilist.fcommercecompose.data.entity.informative.Score
 import com.mobilist.fcommercecompose.data.entity.product.Category
@@ -21,6 +22,12 @@ interface ProductDao {
     suspend fun insertOrder(order: Order): Long
 
     @Insert
+    suspend fun insertComment(comment: Comment): Long
+
+    @Insert
+    suspend fun insertScore(score: Score): Long
+
+    @Insert
     suspend fun insertAll(vararg users: Product): List<Long>
 
     @Query("SELECT * FROM Product")
@@ -33,8 +40,12 @@ interface ProductDao {
     suspend fun getSearchProduct(Id:Int,str:String): List<ProductMainItem>
 
 
-    @Query("select myOrder.orderDate,Product.coverImagePath,Product.productName,Product.productMinDeclaration,Product.UUID as productId,User.name,User.lastName,User.UUID as userId,myOrder.orderStatus,myOrder.UUID as orderId from `Order`as myOrder inner join Product on Product.UUID=myOrder.product inner join User on User.UUID=myOrder.user where orderStatus=3 and myOrder.user=:Id and  Product.productName LIKE '%' || :str || '%'")
+    @Query("select ProductPrice.productPrice,ProductPrice.productDiscountRate,myOrder.orderDate,Product.coverImagePath,Product.productName,Product.productMinDeclaration,Product.UUID as productId,User.name,User.lastName,User.UUID as userId,myOrder.orderStatus,myOrder.UUID as orderId from `Order`as myOrder inner join ProductPrice on Product.UUID=ProductPrice.product inner join Product on Product.UUID=myOrder.product inner join User on User.UUID=myOrder.user where orderStatus=3 and myOrder.user=:Id and  Product.productName LIKE '%' || :str || '%'")
     suspend fun getCommentableProduct(Id:Int,str:String): List<CommentProductModel>
+
+    @Query("select ProductPrice.productPrice,ProductPrice.productDiscountRate,myOrder.orderDate,Product.coverImagePath,Product.productName,Product.productMinDeclaration,Product.UUID as productId,User.name,User.lastName,User.UUID as userId,myOrder.orderStatus,myOrder.UUID as orderId from `Order`as myOrder inner join ProductPrice on Product.UUID=ProductPrice.product inner join Product on Product.UUID=myOrder.product inner join User on User.UUID=myOrder.user where orderStatus=3 and myOrder.user=:Id and  Product.UUID=:productId")
+    suspend fun getCommentableProduct(Id:Int,productId:Int): CommentProductModel
+
 
     @Query("select * from 'Like' as myLike where myLike.product=:ProductId and myLike.user=:UserId")
     suspend fun isLike(ProductId: Int, UserId: Int): List<Like>

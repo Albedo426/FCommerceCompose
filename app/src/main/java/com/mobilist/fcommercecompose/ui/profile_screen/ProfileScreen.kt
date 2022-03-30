@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -35,6 +36,7 @@ import com.mobilist.fcommercecompose.ui.order_screen.component.OrderItem
 import com.mobilist.fcommercecompose.ui.profile_screen.address_change_screen.AddressChangeScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.address_change_screen.address_add_screen.AddressAddScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.comment_product_screen.CommentProductScreen
+import com.mobilist.fcommercecompose.ui.profile_screen.comment_product_screen.comment_add_screen.CommentAddScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.component.AccountMenu
 import com.mobilist.fcommercecompose.ui.profile_screen.incoming_order_screen.InComingOrderScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.incoming_order_screen.change_order_status_screen.ChangeOrderStatusScreen
@@ -44,6 +46,7 @@ import com.mobilist.fcommercecompose.ui.profile_screen.my_order_screen.my_order_
 import com.mobilist.fcommercecompose.ui.profile_screen.password_change_screen.PasswordChangeScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.user_change_screen.UserChangeScreen
 
+@ExperimentalComposeUiApi
 @ExperimentalPagerApi
 @ExperimentalFoundationApi
 @Composable
@@ -57,6 +60,16 @@ fun ProfileScreen(
         }
         composable("comment_product_screen") {
             CommentProductScreen(navController)
+        }
+        composable("comment_add_screen/{Id}", arguments = listOf(
+            navArgument("Id") {
+                type = NavType.IntType
+            }
+        )) {
+            val id = remember {
+                it.arguments?.getInt("Id", 0)
+            }
+            CommentAddScreen(navController = navController, Id = id!!)
         }
         composable("password_change_screen") {
             PasswordChangeScreen(navController)

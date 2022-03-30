@@ -1,6 +1,9 @@
 package com.mobilist.fcommercecompose.services.repo.product
 
+import androidx.room.ColumnInfo
+import com.mobilist.fcommercecompose.data.entity.informative.Comment
 import com.mobilist.fcommercecompose.data.entity.informative.Like
+import com.mobilist.fcommercecompose.data.entity.informative.Score
 import com.mobilist.fcommercecompose.data.entity.product.Category
 import com.mobilist.fcommercecompose.data.entity.product.Product
 import com.mobilist.fcommercecompose.data.entity.product.ProductImage
@@ -9,6 +12,7 @@ import com.mobilist.fcommercecompose.data.entity.shopping_list.Order
 import com.mobilist.fcommercecompose.data.model.*
 import com.mobilist.fcommercecompose.services.room.product_api.ProductDao
 import com.mobilist.fcommercecompose.util.Resource
+import com.mobilist.fcommercecompose.util.getNowTimeString
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -99,6 +103,25 @@ class ProductRepositoryImpl  @Inject constructor(private val productDao : Produc
             Resource.Error(e.message!!)
         }
     }
+    override suspend fun getCommentableProduct(Id: Int,productId:Int): Resource< CommentProductModel> {
+        return try {
+            val resource=productDao.getCommentableProduct(Id,productId)
+            Resource.Success(resource)
+        }catch (e: Exception){
+            Resource.Error(e.message!!)
+        }
+    }
+
+    override suspend fun addComment(Id: Int,productId:Int,str:String,point:Int): Resource< Boolean> {
+        return try {
+            val resourceScore=productDao.insertScore(Score(Id,productId,point))
+            val resourceComment=productDao.insertComment(Comment("",str,"".getNowTimeString(),Id,productId))
+            Resource.Success(true)
+        }catch (e: Exception){
+            Resource.Error(e.message!!)
+        }
+    }
+
 
     override suspend fun getCategoriesMainProduct(): Resource<List<Category>> {
         return try {

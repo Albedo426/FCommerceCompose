@@ -2,11 +2,22 @@ package com.mobilist.fcommercecompose.util
 
 import androidx.navigation.NavController
 import androidx.navigation.NavOptionsBuilder
+import com.mobilist.fcommercecompose.data.model.OrderModel
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import kotlin.math.round
 fun NavOptionsBuilder.popUpToTop(navController: NavController) {
     popUpTo(navController.currentBackStackEntry?.destination?.route ?: return) {
         inclusive =  true
     }
+}
+
+fun String.getNowTimeString():String{
+    val order= OrderModel()
+    val current = LocalDateTime.now()
+
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    return current.format(formatter)
 }
 fun Double.round(decimals: Int): Double {
     var multiplier = 1.0

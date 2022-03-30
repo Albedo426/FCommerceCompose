@@ -9,6 +9,8 @@ import com.mobilist.fcommercecompose.data.entity.shopping_list.Order
 import com.mobilist.fcommercecompose.data.model.*
 
 interface ProductRepositroy {
+    suspend fun addComment(Id: Int,productId:Int,str:String,point:Int): Resource< Boolean>
+    suspend fun getCommentableProduct(Id: Int,productId:Int): Resource<CommentProductModel>
     suspend fun getCategoriesMainProduct(): Resource< List<Category>>
     suspend fun getCategoriesLowerMainProduct(Id: Int): Resource< List<Category>>
     suspend fun getCategoriesLowerSimpleProduct(Id: Int): Resource< List<Category>>
