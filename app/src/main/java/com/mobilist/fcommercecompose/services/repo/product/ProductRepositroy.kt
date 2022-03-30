@@ -9,7 +9,6 @@ import com.mobilist.fcommercecompose.data.entity.shopping_list.Order
 import com.mobilist.fcommercecompose.data.model.*
 
 interface ProductRepositroy {
-
     suspend fun getCategoriesMainProduct(): Resource< List<Category>>
     suspend fun getCategoriesLowerMainProduct(Id: Int): Resource< List<Category>>
     suspend fun getCategoriesLowerSimpleProduct(Id: Int): Resource< List<Category>>
@@ -23,6 +22,7 @@ interface ProductRepositroy {
     suspend fun getOrderStatusAll(Id: Int): Resource<MyOrderStatusResponseModel>
     suspend fun getInComingOrderAll(Id: Int): Resource< List<RequestOrderModel>>
     suspend fun getImageByProductId(Id:Int): Resource<List<ProductImage>>
+    suspend fun getCommentableProduct(Id: Int,str:String): Resource< List<CommentProductModel>>
     suspend fun getHomeProduct(Id:Int): Resource<List<ProductMainItem>>
     suspend fun getFavoriteProduct(Id:Int): Resource<List<ProductMainItem>>
     suspend fun getCategoryProduct(Id:Int): Resource<List<ProductMainItem>>

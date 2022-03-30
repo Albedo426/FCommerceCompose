@@ -23,7 +23,7 @@ fun AccountMenu(navController: NavHostController, navControllerMain: NavControll
         navController.navigate("in_coming_order_screen")
     }
     AccountMenuItem("Değerlendirmeler", R.drawable.ic_baseline_comment_24) {
-
+        navController.navigate("comment_product_screen")
     }
     AccountMenuItem("Ürün Ekle", R.drawable.ic_baseline_add_box_24) {
 

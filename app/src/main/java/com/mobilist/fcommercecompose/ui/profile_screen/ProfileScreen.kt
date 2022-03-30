@@ -34,6 +34,7 @@ import com.mobilist.fcommercecompose.ui.components.top_bar.BasicTopBar
 import com.mobilist.fcommercecompose.ui.order_screen.component.OrderItem
 import com.mobilist.fcommercecompose.ui.profile_screen.address_change_screen.AddressChangeScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.address_change_screen.address_add_screen.AddressAddScreen
+import com.mobilist.fcommercecompose.ui.profile_screen.comment_product_screen.CommentProductScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.component.AccountMenu
 import com.mobilist.fcommercecompose.ui.profile_screen.incoming_order_screen.InComingOrderScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.incoming_order_screen.change_order_status_screen.ChangeOrderStatusScreen
@@ -53,6 +54,9 @@ fun ProfileScreen(
     NavHost(navController, startDestination = "profile_screen") {
         composable("profile_screen") {
             MyProfileScreen(navController, navControllerMain)
+        }
+        composable("comment_product_screen") {
+            CommentProductScreen(navController)
         }
         composable("password_change_screen") {
             PasswordChangeScreen(navController)

@@ -86,6 +86,20 @@ class ProductRepositoryImpl  @Inject constructor(private val productDao : Produc
         }
     }
 
+
+    override suspend fun getCommentableProduct(Id: Int,str:String): Resource< List<CommentProductModel>> {
+        return try {
+            val resource=productDao.getCommentableProduct(Id,str)
+            if(resource.isEmpty()){
+                Resource.Error("Henüz bir ürün Teslim Almadınız")
+            }else {
+                Resource.Success(resource)
+            }
+        }catch (e: Exception){
+            Resource.Error(e.message!!)
+        }
+    }
+
     override suspend fun getCategoriesMainProduct(): Resource<List<Category>> {
         return try {
             val resource=productDao.getCategoriesMainProduct()

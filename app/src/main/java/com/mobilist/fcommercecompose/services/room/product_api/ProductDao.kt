@@ -10,10 +10,7 @@ import com.mobilist.fcommercecompose.data.entity.product.Product
 import com.mobilist.fcommercecompose.data.entity.product.ProductImage
 import com.mobilist.fcommercecompose.data.entity.product.ProductMainItem
 import com.mobilist.fcommercecompose.data.entity.shopping_list.Order
-import com.mobilist.fcommercecompose.data.model.CommentDetailModel
-import com.mobilist.fcommercecompose.data.model.DetailProductModel
-import com.mobilist.fcommercecompose.data.model.MyOrderStatusResponseModel
-import com.mobilist.fcommercecompose.data.model.RequestOrderModel
+import com.mobilist.fcommercecompose.data.model.*
 
 @Dao
 interface ProductDao {
@@ -35,6 +32,9 @@ interface ProductDao {
     @Query("select Product.productName ,Product.productMinDeclaration,Product.UUID ,quantity,ProductPrice.productPrice,ProductPrice.productDiscountRate,finishDate,startDate,coverImagePath,(select UUID from `Like` as myLike where myLike.product=Product.UUID  and  myLike.user=:Id ) as isLike from Product inner join ProductPrice on Product.UUID=ProductPrice.product where Product.productName LIKE '%' || :str || '%'")
     suspend fun getSearchProduct(Id:Int,str:String): List<ProductMainItem>
 
+
+    @Query("select myOrder.orderDate,Product.coverImagePath,Product.productName,Product.productMinDeclaration,Product.UUID as productId,User.name,User.lastName,User.UUID as userId,myOrder.orderStatus,myOrder.UUID as orderId from `Order`as myOrder inner join Product on Product.UUID=myOrder.product inner join User on User.UUID=myOrder.user where orderStatus=3 and myOrder.user=:Id and  Product.productName LIKE '%' || :str || '%'")
+    suspend fun getCommentableProduct(Id:Int,str:String): List<CommentProductModel>
 
     @Query("select * from 'Like' as myLike where myLike.product=:ProductId and myLike.user=:UserId")
     suspend fun isLike(ProductId: Int, UserId: Int): List<Like>
