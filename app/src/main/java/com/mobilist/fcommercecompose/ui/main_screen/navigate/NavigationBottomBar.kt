@@ -3,6 +3,7 @@ package com.mobilist.fcommercecompose.ui.main_screen.navigate
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -18,7 +19,6 @@ import com.mobilist.fcommercecompose.ui.favorite_screen.FavoriteScreen
 import com.mobilist.fcommercecompose.ui.home_screen.HomeScreen
 import com.mobilist.fcommercecompose.ui.main_screen.bottom_navigate_bar.NavigationItem
 import com.mobilist.fcommercecompose.ui.order_screen.OrderScreen
-import com.mobilist.fcommercecompose.ui.product_detail.ProductDetail
 import com.mobilist.fcommercecompose.ui.profile_screen.ProfileScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.address_change_screen.AddressChangeScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.address_change_screen.address_add_screen.AddressAddScreen
@@ -30,21 +30,22 @@ import com.mobilist.fcommercecompose.ui.profile_screen.my_order_screen.my_order_
 import com.mobilist.fcommercecompose.ui.profile_screen.password_change_screen.PasswordChangeScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.user_change_screen.UserChangeScreen
 
+@ExperimentalComposeUiApi
 @ExperimentalFoundationApi
 @ExperimentalPagerApi
 @Composable
-//burası bottombar için  ordan tıklananları açar ekleme çıkarma olanbilir
-//bottom bar ile birlikte gider buttom bar altta kalmasını istiyorsan burdan işlem yap
+// burası bottombar için  ordan tıklananları açar ekleme çıkarma olanbilir
+// bottom bar ile birlikte gider buttom bar altta kalmasını istiyorsan burdan işlem yap
 fun NavigationBottomBar(navController: NavHostController, navControllerMain: NavController) {
     NavHost(navController, startDestination = NavigationItem.Home.route) {
         composable(NavigationItem.Home.route) {
-            HomeScreen(navController,navControllerMain)
+            HomeScreen(navController, navControllerMain)
         }
         composable(NavigationItem.Shopping.route) {
             OrderScreen(navControllerMain)
         }
         composable(NavigationItem.Favorite.route) {
-            FavoriteScreen(navController,navControllerMain)
+            FavoriteScreen(navController, navControllerMain)
         }
         composable(NavigationItem.Category.route) {
             CategoryScreen(navControllerMain)
@@ -73,60 +74,74 @@ fun NavigationBottomBar(navController: NavHostController, navControllerMain: Nav
         composable("in_coming_order_screen") {
             InComingOrderScreen(navController)
         }
-        composable("change_order_status_screen/{Id}", arguments = listOf(
-        navArgument("Id") {
-            type = NavType.IntType
-        }
-        )) {
-        val id = remember {
-            it.arguments?.getInt("Id",0)
-        }
-            ChangeOrderStatusScreen(navController = navController,Id= id!!)
-        }
-
-        composable("my_order_detail_screen/{Id}", arguments = listOf(
-            navArgument("Id") {
-                type = NavType.IntType
-            }
-        )) {
+        composable(
+            "change_order_status_screen/{Id}",
+            arguments = listOf(
+                navArgument("Id") {
+                    type = NavType.IntType
+                }
+            )
+        ) {
             val id = remember {
-                it.arguments?.getInt("Id",0)
+                it.arguments?.getInt("Id", 0)
             }
-            MyOrderDetailScreen(navController = navController,Id= id!!)
+            ChangeOrderStatusScreen(navController = navController, Id = id!!)
         }
 
-
-        composable("lower_main_category/{Id}", arguments = listOf(
-            navArgument("Id") {
-                type = NavType.IntType
-            }
-        )) {
+        composable(
+            "my_order_detail_screen/{Id}",
+            arguments = listOf(
+                navArgument("Id") {
+                    type = NavType.IntType
+                }
+            )
+        ) {
             val id = remember {
-                it.arguments?.getInt("Id",0)
+                it.arguments?.getInt("Id", 0)
             }
-            LowerMainCategoryScreen(navController = navController,mainCategoryId= id!!)
+            MyOrderDetailScreen(navController = navController, Id = id!!)
         }
 
-        composable("lower_simple_category/{Id}", arguments = listOf(
-            navArgument("Id") {
-                type = NavType.IntType
-            }
-        )) {
+        composable(
+            "lower_main_category/{Id}",
+            arguments = listOf(
+                navArgument("Id") {
+                    type = NavType.IntType
+                }
+            )
+        ) {
             val id = remember {
-                it.arguments?.getInt("Id",0)
+                it.arguments?.getInt("Id", 0)
             }
-            LowerSimpleCategoryScreen(navController = navController,lowerCategoryId= id!!)
+            LowerMainCategoryScreen(navController = navController, mainCategoryId = id!!)
         }
 
-        composable("category_product_screen/{Id}", arguments = listOf(
-            navArgument("Id") {
-                type = NavType.IntType
-            }
-        )) {
+        composable(
+            "lower_simple_category/{Id}",
+            arguments = listOf(
+                navArgument("Id") {
+                    type = NavType.IntType
+                }
+            )
+        ) {
             val id = remember {
-                it.arguments?.getInt("Id",0)
+                it.arguments?.getInt("Id", 0)
             }
-            CategoryProductScreen(navController,navControllerMain,id!!)
+            LowerSimpleCategoryScreen(navController = navController, lowerCategoryId = id!!)
+        }
+
+        composable(
+            "category_product_screen/{Id}",
+            arguments = listOf(
+                navArgument("Id") {
+                    type = NavType.IntType
+                }
+            )
+        ) {
+            val id = remember {
+                it.arguments?.getInt("Id", 0)
+            }
+            CategoryProductScreen(navController, navControllerMain, id!!)
         }
     }
 }

@@ -1,25 +1,17 @@
 package com.mobilist.fcommercecompose.services.repo.product
 
-import com.mobilist.fcommercecompose.data.entity.product.Category
 import com.mobilist.fcommercecompose.data.entity.product.Product
 import com.mobilist.fcommercecompose.data.entity.product.ProductImage
 import com.mobilist.fcommercecompose.data.entity.product.ProductMainItem
-import com.mobilist.fcommercecompose.data.entity.shopping_list.Order
 import com.mobilist.fcommercecompose.data.model.*
 import com.mobilist.fcommercecompose.util.Resource
 
-interface ProductRepositroy {
+interface ProductRepository {
     suspend fun addComment(Id: Int, productId: Int, str: String, point: Int): Resource< Boolean>
     suspend fun getCommentableProduct(Id: Int, productId: Int): Resource<CommentProductModel>
-    suspend fun getCategoriesMainProduct(): Resource< List<Category>>
-    suspend fun getCategoriesLowerMainProduct(Id: Int): Resource< List<Category>>
-    suspend fun getCategoriesLowerSimpleProduct(Id: Int): Resource< List<Category>>
     suspend fun isLike(ProductId: Int, UserId: Int): Resource<Boolean>
     suspend fun getSearchProduct(Id: Int, str: String): Resource<List<ProductMainItem>>
     suspend fun getSearchFavoriteProduct(Id: Int, str: String): Resource<List<ProductMainItem>>
-    suspend fun searchCategoriesMainProduct(str: String): Resource<List<Category>>
-    suspend fun searchCategoriesLowerMainProduct(Id: Int, str: String): Resource<List<Category>>
-    suspend fun searchCategoriesLowerSimpleProduct(Id: Int, str: String): Resource<List<Category>>
     suspend fun getSearchCategoryProduct(Id: Int, str: String): Resource<List<ProductMainItem>>
     suspend fun getImageByProductId(Id: Int): Resource<List<ProductImage>>
     suspend fun getCommentableProduct(Id: Int, str: String): Resource< List<CommentProductModel>>

@@ -3,7 +3,6 @@ package com.mobilist.fcommercecompose.services.repo.product
 import com.mobilist.fcommercecompose.data.entity.informative.Comment
 import com.mobilist.fcommercecompose.data.entity.informative.Like
 import com.mobilist.fcommercecompose.data.entity.informative.Score
-import com.mobilist.fcommercecompose.data.entity.product.Category
 import com.mobilist.fcommercecompose.data.entity.product.Product
 import com.mobilist.fcommercecompose.data.entity.product.ProductImage
 import com.mobilist.fcommercecompose.data.entity.product.ProductMainItem
@@ -15,7 +14,7 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(private val productDao: ProductDao) :
-    ProductRepositroy {
+    ProductRepository {
 
     override suspend fun insert(product: Product): Long {
         return productDao.insert(product)
@@ -68,80 +67,6 @@ class ProductRepositoryImpl @Inject constructor(private val productDao: ProductD
         }
     }
 
-    override suspend fun getCategoriesMainProduct(): Resource<List<Category>> {
-        return try {
-            val resource = productDao.getCategoriesMainProduct()
-            if (resource.isEmpty()) {
-                Resource.Error("Kategori Yok")
-            } else {
-                Resource.Success(resource)
-            }
-        } catch (e: Exception) {
-            Resource.Error(e.message!!)
-        }
-    }
-    override suspend fun searchCategoriesMainProduct(str: String): Resource<List<Category>> {
-        return try {
-            val resource = productDao.searchCategoriesMainProduct(str)
-            if (resource.isEmpty()) {
-                Resource.Error("Kategori Yok")
-            } else {
-                Resource.Success(resource)
-            }
-        } catch (e: Exception) {
-            Resource.Error(e.message!!)
-        }
-    }
-
-    override suspend fun getCategoriesLowerMainProduct(Id: Int): Resource<List<Category>> {
-        return try {
-            val resource = productDao.getCategoriesLowerMainProduct(Id)
-            if (resource.isEmpty()) {
-                Resource.Error("Kategori Yok")
-            } else {
-                Resource.Success(resource)
-            }
-        } catch (e: Exception) {
-            Resource.Error(e.message!!)
-        }
-    }
-    override suspend fun searchCategoriesLowerMainProduct(Id: Int, str: String): Resource<List<Category>> {
-        return try {
-            val resource = productDao.searchCategoriesLowerMainProduct(Id, str)
-            if (resource.isEmpty()) {
-                Resource.Error("Kategori Yok")
-            } else {
-                Resource.Success(resource)
-            }
-        } catch (e: Exception) {
-            Resource.Error(e.message!!)
-        }
-    }
-
-    override suspend fun getCategoriesLowerSimpleProduct(Id: Int): Resource<List<Category>> {
-        return try {
-            val resource = productDao.getCategoriesLowerSimpleProduct(Id)
-            if (resource.isEmpty()) {
-                Resource.Error("Kategori Yok")
-            } else {
-                Resource.Success(resource)
-            }
-        } catch (e: Exception) {
-            Resource.Error(e.message!!)
-        }
-    }
-    override suspend fun searchCategoriesLowerSimpleProduct(Id: Int, str: String): Resource<List<Category>> {
-        return try {
-            val resource = productDao.searchCategoriesLowerSimpleProduct(Id, str)
-            if (resource.isEmpty()) {
-                Resource.Error("Kategori Yok")
-            } else {
-                Resource.Success(resource)
-            }
-        } catch (e: Exception) {
-            Resource.Error(e.message!!)
-        }
-    }
 
     override suspend fun getImageByProductId(Id: Int): Resource<List<ProductImage>> {
         return try {

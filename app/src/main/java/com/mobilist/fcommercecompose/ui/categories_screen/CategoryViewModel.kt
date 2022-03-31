@@ -8,6 +8,7 @@ import com.mobilist.fcommercecompose.base.BaseViewModel
 import com.mobilist.fcommercecompose.data.entity.product.Category
 import com.mobilist.fcommercecompose.data.entity.product.toProductMainItem
 import com.mobilist.fcommercecompose.data.model.LoginModel
+import com.mobilist.fcommercecompose.services.repo.category.CategoryRepositoryImpl
 import com.mobilist.fcommercecompose.services.repo.product.ProductRepositoryImpl
 import com.mobilist.fcommercecompose.services.repo.user.UserRepositoryImpl
 import com.mobilist.fcommercecompose.util.Resource
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CategoryViewModel @Inject constructor(
     application: Application,
-    var productRepositoryImpl: ProductRepositoryImpl
+    var categoryRepositoryImpl: CategoryRepositoryImpl
+
 ) : BaseViewModel(application) {
     var list = mutableStateOf<List<Category>>(listOf())
     var errorMessage = mutableStateOf("")
@@ -30,7 +32,7 @@ class CategoryViewModel @Inject constructor(
         launch {
             isLoading.value=true
             launch {
-                when(val result=productRepositoryImpl.getCategoriesMainProduct()){
+                when(val result=categoryRepositoryImpl.getCategoriesMainProduct()){
                     is Resource.Success->{
                         list.value=result.data!!
                         errorMessage.value=""
@@ -47,7 +49,7 @@ class CategoryViewModel @Inject constructor(
         launch {
             isLoading.value=true
             launch {
-                when(val result=productRepositoryImpl.searchCategoriesMainProduct(str)){
+                when(val result=categoryRepositoryImpl.searchCategoriesMainProduct(str)){
                     is Resource.Success->{
                         list.value=result.data!!
                         errorMessage.value=""
