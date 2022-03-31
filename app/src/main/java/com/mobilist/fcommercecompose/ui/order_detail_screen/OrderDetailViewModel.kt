@@ -7,10 +7,8 @@ import com.mobilist.fcommercecompose.base.BaseViewModel
 import com.mobilist.fcommercecompose.controller.user.AddressController
 import com.mobilist.fcommercecompose.data.model.RequestOrderModel
 import com.mobilist.fcommercecompose.data.model.UserAddressModel
-import com.mobilist.fcommercecompose.services.repo.product.ProductRepositoryImpl
-import com.mobilist.fcommercecompose.services.repo.user.UserRepositoryImpl
+import com.mobilist.fcommercecompose.services.repo.order.OrderRepositoryImpl
 import com.mobilist.fcommercecompose.util.Resource
-import com.mobilist.fcommercecompose.util.percentage
 import com.mobilist.fcommercecompose.util.percentageDouble
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,10 +17,9 @@ import javax.inject.Inject
 @HiltViewModel
 class OrderDetailViewModel @Inject constructor(
     application: Application,
-    private var productRepositoryImpl: ProductRepositoryImpl,
     private var customSharedPreferences: CustomSharedPreferences,
     private var addressController: AddressController,
-    private var userRepositoryImpl: UserRepositoryImpl
+    private var orderRepositoryImpl: OrderRepositoryImpl
 ) : BaseViewModel(application) {
 
     var listAddress = mutableStateOf<List<UserAddressModel>>(listOf())
@@ -36,7 +33,6 @@ class OrderDetailViewModel @Inject constructor(
     var billAddressId = mutableStateOf(0)
     var shipAddressId = mutableStateOf(0)
 
-
     init {
         loadListOrderDetail()
         loadListAddress()
@@ -44,9 +40,13 @@ class OrderDetailViewModel @Inject constructor(
 
     fun applyOrder() {
         launch {
-            when (val result =
-                productRepositoryImpl.updateOrderStatus(0,billAddressId.value,shipAddressId.value,
-                    listOrder.value.map { it.UUID }.toIntArray())) {
+            when (
+                val result =
+                    orderRepositoryImpl.updateOrderStatus(
+                        0, billAddressId.value, shipAddressId.value,
+                        listOrder.value.map { it.UUID }.toIntArray()
+                    )
+            ) {
                 is Resource.Success -> {
                     allPrice.value = 0.0
                     errorMessage.value = ""
@@ -68,8 +68,10 @@ class OrderDetailViewModel @Inject constructor(
     private fun loadListOrderDetail() {
         isLoading.value = true
         launch {
-            when (val result =
-                productRepositoryImpl.getMyOrder(customSharedPreferences.getUserId()!!)) {
+            when (
+                val result =
+                    orderRepositoryImpl.getMyOrder(customSharedPreferences.getUserId()!!)
+            ) {
                 is Resource.Success -> {
                     listOrder.value = result.data!!
                     allPrice.value = 0.0
@@ -77,7 +79,7 @@ class OrderDetailViewModel @Inject constructor(
                         if (it.quantity == 0) {
                             it.quantity = 1
                         }
-                        allPrice.value += it.productPrice.percentageDouble(it.productDiscountRate)* it.quantity
+                        allPrice.value += it.productPrice.percentageDouble(it.productDiscountRate) * it.quantity
                     }
                     errorMessage.value = ""
                 }

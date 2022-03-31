@@ -1,6 +1,7 @@
 package com.mobilist.fcommercecompose.controller.product.order.di
 
 import com.mobilist.fcommercecompose.controller.product.order.OrderController
+import com.mobilist.fcommercecompose.services.repo.order.OrderRepositoryImpl
 import com.mobilist.fcommercecompose.services.repo.product.ProductRepositoryImpl
 import dagger.Module
 import dagger.Provides
@@ -14,7 +15,7 @@ import javax.inject.Singleton
 class OrderModule {
     @Provides
     @Singleton
-    fun provideOrderModule(productRepositoryImpl: ProductRepositoryImpl): OrderController {
-        return OrderController(productRepositoryImpl)
+    fun provideOrderModule(orderRepositoryImpl: OrderRepositoryImpl): OrderController {
+        return OrderController(orderRepositoryImpl)
     }
 }
