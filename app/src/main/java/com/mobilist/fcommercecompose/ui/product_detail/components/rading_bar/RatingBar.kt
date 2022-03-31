@@ -6,11 +6,10 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.R
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,16 +17,15 @@ import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
-
 @ExperimentalComposeUiApi
 @Composable
 fun RatingBar(
     modifier: Modifier = Modifier,
     rating: Int,
-    clickable:Boolean=true,
-    animate:Boolean=true,
-    animateStartSize:Int=30,
-    animateFinishSize:Int=15,
+    clickable: Boolean = true,
+    animate: Boolean = true,
+    animateStartSize: Int = 30,
+    animateFinishSize: Int = 15,
     onClick: (Int) -> Unit = {}
 ) {
     var ratingState by remember {
@@ -39,11 +37,12 @@ fun RatingBar(
     }
 
     val size by animateDpAsState(
-        targetValue=if(animate){
-              if (selected) animateStartSize.dp else animateFinishSize.dp
-        }else{
-             if (selected) animateFinishSize.dp else animateFinishSize.dp
-        },spring(Spring.DampingRatioMediumBouncy)
+        targetValue = if (animate) {
+            if (selected) animateStartSize.dp else animateFinishSize.dp
+        } else {
+            if (selected) animateFinishSize.dp else animateFinishSize.dp
+        },
+        spring(Spring.DampingRatioMediumBouncy)
     )
 
     Row(
@@ -59,7 +58,7 @@ fun RatingBar(
                     .width(size)
                     .height(size)
                     .pointerInteropFilter {
-                        if(clickable){
+                        if (clickable) {
                             when (it.action) {
                                 MotionEvent.ACTION_DOWN -> {
                                     selected = true

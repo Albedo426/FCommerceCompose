@@ -9,15 +9,15 @@ import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mobilist.fcommercecompose.data.model.SearchWidgetState
-import com.mobilist.fcommercecompose.ui.components.error_components.ErrorBasicComponent
+import com.mobilist.fcommercecompose.ui.components.cards.ProductListView
+import com.mobilist.fcommercecompose.ui.components.error_components.ErrorControllerBasicComponent
 import com.mobilist.fcommercecompose.ui.components.top_bar.SearchTopBar
-import com.mobilist.fcommercecompose.ui.home_screen.home_product_screen.HomeProductViewModel
-import com.mobilist.fcommercecompose.ui.home_screen.home_product_screen.component.list_view.ProductListView
 
 @ExperimentalFoundationApi
 @Composable
 fun SearchProductScreen(
-    navController: NavController,  viewModel: SearchProductViewModel = hiltViewModel()
+    navController: NavController,
+    viewModel: SearchProductViewModel = hiltViewModel()
 ) {
     remember {
         viewModel.loadList()
@@ -36,7 +36,7 @@ fun SearchProductScreen(
     Column() {
         SearchTopBar(
             navController,
-            title= "Ürün Arama",
+            title = "Ürün Arama",
             textSearch = "Ara",
             searchWidgetState = searchWidgetState.value,
             searchTextState = searchTextState.value,
@@ -53,12 +53,8 @@ fun SearchProductScreen(
                 searchWidgetState.value = SearchWidgetState.OPENED
             }
         )
-        if (error != "" || loading) {
-            ErrorBasicComponent(loading = loading, error = error) {
-                viewModel.loadList()
-            }
-        } else {
-            ProductListView(data, navController,false)
+        ErrorControllerBasicComponent(loading, error, onClick = { viewModel.loadList() }) {
+            ProductListView(data, navController, false)
         }
     }
 }

@@ -30,9 +30,11 @@ import com.mobilist.fcommercecompose.R
 import com.mobilist.fcommercecompose.ui.categories_screen.category_product.CategoryProductScreen
 import com.mobilist.fcommercecompose.ui.categories_screen.lower_main_category.LowerMainCategoryScreen
 import com.mobilist.fcommercecompose.ui.categories_screen.lower_simple_category.LowerSimpleCategoryScreen
+import com.mobilist.fcommercecompose.ui.components.error_components.ErrorControllerErrorOnlyTextComponent
 import com.mobilist.fcommercecompose.ui.components.error_components.ErrorOnlyTextComponent
 import com.mobilist.fcommercecompose.ui.components.top_bar.BasicTopBar
 import com.mobilist.fcommercecompose.ui.order_screen.component.OrderItem
+import com.mobilist.fcommercecompose.ui.product_detail.Content
 import com.mobilist.fcommercecompose.ui.profile_screen.address_change_screen.AddressChangeScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.address_change_screen.address_add_screen.AddressAddScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.comment_product_screen.CommentProductScreen
@@ -165,9 +167,7 @@ fun MyProfileScreen(
         viewModel.isLoading
     }
     Column(Modifier.fillMaxSize()) {
-        if (errorMessage != "") {
-            ErrorOnlyTextComponent(isLoading, errorMessage)
-        } else {
+        ErrorControllerErrorOnlyTextComponent(isLoading, errorMessage) {
             BasicTopBar(myUser.userEmail)
             LazyColumn(
                 Modifier.weight(0.1f)

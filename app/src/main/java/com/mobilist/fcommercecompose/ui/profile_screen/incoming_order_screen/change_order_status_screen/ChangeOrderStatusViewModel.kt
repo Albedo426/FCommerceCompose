@@ -23,8 +23,6 @@ class ChangeOrderStatusViewModel @Inject constructor(
     var cargoName = mutableStateOf("")
     var trackingNumber = mutableStateOf("")
     var listImage = mutableStateOf<List<ProductImagesModel>>(listOf())
-    var errorMessage = mutableStateOf("")
-    var isLoading = mutableStateOf(false)
 
     fun saveOrder(openDialog: MutableState<Boolean>) {
         launch {

@@ -15,30 +15,28 @@ class AddressChangeViewModel @Inject constructor(
     application: Application,
     private var addressController: AddressController,
     private var userRepositoryImpl: UserRepositoryImpl
-) : BaseViewModel(application)  {
+) : BaseViewModel(application) {
 
     var myAddress = mutableStateOf<List<UserAddressModel>>(listOf())
-    var errorMessage = mutableStateOf("")
-    var isLoading = mutableStateOf(false)
 
-    init{
+    init {
         init()
     }
 
-    fun init(){
+    fun init() {
         launch {
-            addressController.getAddress(myAddress,isLoading,errorMessage)
+            addressController.getAddress(myAddress, isLoading, errorMessage)
         }
     }
-    fun remove(address :UserAddressModel){
+    fun remove(address: UserAddressModel) {
         launch {
-            when(val result=userRepositoryImpl.deleteAddressById(address.UUID)){
-                is Resource.Success ->{
-                    errorMessage.value=""
+            when (val result = userRepositoryImpl.deleteAddressById(address.UUID)) {
+                is Resource.Success -> {
+                    errorMessage.value = ""
                     init()
                 }
-                is Resource.Error->{
-                    errorMessage.value=result.message!!
+                is Resource.Error -> {
+                    errorMessage.value = result.message!!
                 }
             }
         }

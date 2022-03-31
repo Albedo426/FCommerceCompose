@@ -1,7 +1,6 @@
 package com.mobilist.fcommercecompose.ui.product_detail.components.rading_bar
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
@@ -11,17 +10,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-
 @Composable
 fun DotsIndicator(
-    totalDots : Int,
-    selectedIndex : Int,
+    totalDots: Int,
+    selectedIndex: Int,
     selectedColor: Color,
     unSelectedColor: Color,
-){
+) {
     LazyRow(
-            modifier = Modifier
-                .padding(5.dp) // padding
+        modifier = Modifier
+            .padding(5.dp) // padding
 
     ) {
         items(totalDots) { index ->

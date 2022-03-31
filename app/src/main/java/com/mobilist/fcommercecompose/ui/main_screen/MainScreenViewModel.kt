@@ -9,5 +9,4 @@ import javax.inject.Inject
 class MainScreenViewModel @Inject constructor(
     application: Application,
     var userRepositoryImpl: UserRepositoryImpl
-) : BaseViewModel(application) {
-}
+) : BaseViewModel(application)

@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -26,11 +26,8 @@ import com.mobilist.fcommercecompose.ui.components.text.TextPassword
 @Composable
 fun LoginScreen(
     navController: NavController,
-    viewModelComposable: LoginViewModel = hiltViewModel()
+    viewModel: LoginViewModel = hiltViewModel()
 ) {
-    val viewModel by remember {
-        mutableStateOf(viewModelComposable)
-    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -64,7 +61,7 @@ fun LoginScreen(
             ) {
                 viewModel.loginModel.userPassword = it
             }
-            BasicButton("Giriş Yap"){
+            BasicButton("Giriş Yap") {
                 viewModel.login()
             }
             Text(
@@ -98,7 +95,4 @@ fun LoginScreen(
             viewModel.errorMessage.value = ""
         }
     }
-
-
 }
-

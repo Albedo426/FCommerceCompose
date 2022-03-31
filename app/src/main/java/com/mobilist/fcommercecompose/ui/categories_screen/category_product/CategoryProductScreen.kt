@@ -7,15 +7,14 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.mobilist.fcommercecompose.ui.categories_screen.category_product.component.list_view.ProductCategoryListView
 
-
 @ExperimentalFoundationApi
 @Composable
 fun CategoryProductScreen(
     navController: NavHostController,
     navControllerMain: NavController,
-    Id:Int
+    Id: Int
 ) {
     Column() {
-        ProductCategoryListView(  navController,navControllerMain,Id)
+        ProductCategoryListView(navController, navControllerMain, Id)
     }
 }

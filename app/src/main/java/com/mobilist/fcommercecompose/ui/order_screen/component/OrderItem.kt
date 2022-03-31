@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Checkbox
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -42,13 +41,7 @@ fun OrderItem(order: RequestOrderModel, viewModel: OrderScreenViewModel = hiltVi
     ) {
         Column {
             Row(horizontalArrangement = Arrangement.SpaceBetween) {
-              /*  Checkbox(modifier = Modifier.padding(5.dp),
-                    checked = isChecked.value,
-                    onCheckedChange = {
-                        isChecked.value = it
-                    }
-                )*/
-                Text(text =order.name+" "+ order.lastName, modifier = Modifier.padding(5.dp))
+                Text(text = order.name + " " + order.lastName, modifier = Modifier.padding(5.dp))
             }
             MySpacerHorizontal()
             Row(Modifier.fillMaxHeight()) {
@@ -57,12 +50,14 @@ fun OrderItem(order: RequestOrderModel, viewModel: OrderScreenViewModel = hiltVi
                     modifier = Modifier
                         .width(100.dp)
                         .height(100.dp)
-                        .padding(start=5.dp),
+                        .padding(start = 5.dp),
                     contentDescription = "",
                 )
-                Column(modifier = Modifier
-                    .padding(5.dp)
-                    .fillMaxHeight()) {
+                Column(
+                    modifier = Modifier
+                        .padding(5.dp)
+                        .fillMaxHeight()
+                ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
@@ -70,67 +65,69 @@ fun OrderItem(order: RequestOrderModel, viewModel: OrderScreenViewModel = hiltVi
                         Text(text = order.productName, modifier = Modifier.padding(5.dp))
                         Image(
                             painterResource(R.drawable.ic_baseline_delete_outline_24),
-                            contentDescription = "", modifier = Modifier.padding(3.dp).clickable{
+                            contentDescription = "",
+                            modifier = Modifier.padding(3.dp).clickable {
                                 viewModel.remove(order)
                             }
                         )
                     }
                     Row(
-                        modifier = Modifier.fillMaxWidth() .padding(5.dp),
+                        modifier = Modifier.fillMaxWidth().padding(5.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Row(
-                            verticalAlignment = Alignment.CenterVertically, modifier = Modifier
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
                                 .clip(shape = CircleShape)
                                 .height(IntrinsicSize.Min)
                                 .background(colorResource(R.color.mainBlue))
                         ) {
                             Icon(
-                                Icons.Filled.Add, "", tint = Color.White, modifier = Modifier
-                                .padding(start = 3.dp, end = 3.dp)
-                                .clickable {
-                                    itemQuantity.value++
-                                    viewModel.changeAllPrice(true,order.productPrice.percentageDouble(order.productDiscountRate),order.UUID)
-                                    order.quantity=itemQuantity.value;
-                                })
+                                Icons.Filled.Add, "", tint = Color.White,
+                                modifier = Modifier
+                                    .padding(start = 3.dp, end = 3.dp)
+                                    .clickable {
+                                        itemQuantity.value++
+                                        viewModel.changeAllPrice(true, order.productPrice.percentageDouble(order.productDiscountRate), order.UUID)
+                                        order.quantity = itemQuantity.value
+                                    }
+                            )
 
                             MySpacerVertical(
                                 color = Color.White,
 
-                                )
+                            )
                             Text(
                                 text = itemQuantity.value.toString(),
-                                modifier = Modifier.padding(top=4.dp,start=7.dp,end = 7.dp,bottom = 4.dp),
+                                modifier = Modifier.padding(top = 4.dp, start = 7.dp, end = 7.dp, bottom = 4.dp),
                                 color = Color.White
                             )
                             MySpacerVertical(
                                 color = Color.White,
 
-                                )
+                            )
                             Icon(
                                 painter = painterResource(R.drawable.ic_baseline_remove_24),
                                 contentDescription = "print",
                                 tint = Color.White,
-                                modifier = Modifier.padding(end=3.dp,start = 3.dp) .clickable {
-                                    if( itemQuantity.value>1){
+                                modifier = Modifier.padding(end = 3.dp, start = 3.dp).clickable {
+                                    if (itemQuantity.value > 1) {
                                         itemQuantity.value--
-                                        viewModel.changeAllPrice(false,order.productPrice.percentageDouble(order.productDiscountRate),order.UUID)
-                                        order.quantity=itemQuantity.value
+                                        viewModel.changeAllPrice(false, order.productPrice.percentageDouble(order.productDiscountRate), order.UUID)
+                                        order.quantity = itemQuantity.value
                                     }
                                 }
                             )
                         }
 
                         Text(
-                            text =   "%.2f".format((order.productPrice.percentageDouble(order.productDiscountRate)*itemQuantity.value)) ,
+                            text = "%.2f".format((order.productPrice.percentageDouble(order.productDiscountRate) * itemQuantity.value)),
                             modifier = Modifier.padding(5.dp)
                         )
                     }
-
                 }
             }
-
         }
     }
 }

@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.sp
 import com.mobilist.fcommercecompose.data.model.CommentDetailModel
 import com.mobilist.fcommercecompose.ui.product_detail.components.rading_bar.RatingBar
 
-
 @ExperimentalComposeUiApi
 @Composable
 fun CommentItem(item: CommentDetailModel) {
@@ -29,7 +28,7 @@ fun CommentItem(item: CommentDetailModel) {
             modifier = Modifier.alpha(0.7f),
             fontSize = 13.sp
         )
-        Text(text = " "+item.date, modifier = Modifier.alpha(0.5f), fontSize = 13.sp)
+        Text(text = " " + item.date, modifier = Modifier.alpha(0.5f), fontSize = 13.sp)
     }
     Text(text = item.commentText, fontSize = 13.sp)
 }

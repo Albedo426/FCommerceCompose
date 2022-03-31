@@ -16,7 +16,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.mobilist.fcommercecompose.R
 
-
 @Composable
 fun TextName(
     modifier: Modifier,
@@ -30,21 +29,21 @@ fun TextName(
         maxLines = 1,
         singleLine = true,
         colors = TextFieldDefaults.textFieldColors(
-            textColor = colorResource(R.color.text_color),
+            textColor = colorResource(R.color.text_colorDark),
             disabledTextColor = Color.Transparent,
             backgroundColor = colorResource(R.color.white),
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent
         ),
-        onValueChange = { name = it;textChange(name) },
-        //label = { Text(text,color = colorResource(R.color.text_color)) },
+        onValueChange = { name = it; textChange(name) },
+        // label = { Text(text,color = colorResource(R.color.text_color)) },
         placeholder = { Text(text, color = colorResource(R.color.text_colorDark)) },
         modifier = modifier.border(
             width = 2.dp,
             color = colorResource(R.color.text_border_color),
             shape = RoundedCornerShape(border)
         ),
-        shape = RoundedCornerShape(border),//50
+        shape = RoundedCornerShape(border), // 50
     )
 }

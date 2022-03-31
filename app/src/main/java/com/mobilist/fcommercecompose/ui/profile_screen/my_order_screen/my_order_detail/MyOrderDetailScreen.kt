@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.mobilist.fcommercecompose.ui.components.error_components.ErrorControllerErrorOnlyTextComponent
 import com.mobilist.fcommercecompose.ui.components.error_components.ErrorOnlyTextComponent
 import com.mobilist.fcommercecompose.ui.profile_screen.incoming_order_screen.change_order_status_screen.ChangeOrderStatusViewModel
 import com.mobilist.fcommercecompose.ui.profile_screen.my_order_screen.MyOrderViewModel
@@ -37,9 +38,7 @@ fun MyOrderDetailScreen(
     val error by remember {viewModel.errorMessage}
     val loading by remember {viewModel.isLoading}
     Column(Modifier.fillMaxSize()) {
-        if(error!=""){
-            ErrorOnlyTextComponent(loading, error)
-        }else{
+        ErrorControllerErrorOnlyTextComponent(loading, error) {
             MainContentMyOrderDetailScreen(navController,viewModel)
         }
     }

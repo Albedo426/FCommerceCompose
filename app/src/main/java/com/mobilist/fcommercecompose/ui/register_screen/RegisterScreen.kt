@@ -15,16 +15,18 @@ import com.mobilist.fcommercecompose.data.model.ResponseUser
 import com.mobilist.fcommercecompose.data.model.isNullData
 import com.mobilist.fcommercecompose.ui.components.button.BasicButton
 import com.mobilist.fcommercecompose.ui.components.dialog.CustomDialog
+import com.mobilist.fcommercecompose.ui.components.error_components.ErrorControllerErrorOnlyTextComponent
+import com.mobilist.fcommercecompose.ui.components.error_components.ErrorOnlyTextComponent
 import com.mobilist.fcommercecompose.ui.components.text.TextName
 import com.mobilist.fcommercecompose.ui.components.text.TextPassword
-import com.mobilist.fcommercecompose.ui.components.error_components.ErrorOnlyTextComponent
+import com.mobilist.fcommercecompose.ui.profile_screen.user_change_screen.MainContentUserChangeScreen
 
 @Composable
 fun RegisterScreen(
     navController: NavController,
     viewModel: RegisterViewModel = hiltViewModel()
 ) {
-    val requestUser by remember { viewModel.responseUser  }
+    val requestUser by remember { viewModel.responseUser }
     val successesLogin by remember { viewModel.succses }
     val error by remember { viewModel.errorMessage }
     val loading by remember { viewModel.isLoading }
@@ -36,13 +38,13 @@ fun RegisterScreen(
             }
         }
     }
-
-    if (error != "" || loading) {
-        ErrorOnlyTextComponent(loading, error)
-    } else {
-        MyContent(Modifier
-            .padding(bottom = 8.dp)
-            .fillMaxWidth(), requestUser, viewModel)
+    ErrorControllerErrorOnlyTextComponent(loading, error) {
+        MyContent(
+            Modifier
+                .padding(bottom = 8.dp)
+                .fillMaxWidth(),
+            requestUser, viewModel
+        )
     }
 }
 
@@ -186,15 +188,15 @@ fun MyContent(modifier: Modifier, requestUser: ResponseUser, viewModel: Register
                     if (requestUser.isNullData()) {
                         viewModel.saveUser()
                     } else {
-                        openDialog.value=true
+                        openDialog.value = true
                     }
                 }
             }
         }
     }
     if (openDialog.value) {
-       // openDialog, openDialog, editMessage
-        CustomDialog(openDialog= openDialog ,text="Tüm Bilgileri Doldurun", Image = R.drawable.ic_baseline_error_24 ){
+        // openDialog, openDialog, editMessage
+        CustomDialog(openDialog = openDialog, text = "Tüm Bilgileri Doldurun", Image = R.drawable.ic_baseline_error_24) {
         }
     }
 }

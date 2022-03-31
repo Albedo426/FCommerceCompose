@@ -27,16 +27,17 @@ import com.mobilist.fcommercecompose.util.percentage
 @ExperimentalComposeUiApi
 @Composable
 fun ItemTopAttr(viewModel: ProductDetailViewModel = hiltViewModel()) {
-    val data by remember {viewModel.product}
-    val score by remember {viewModel.productScore}
-    val likeCount by remember {viewModel.likeCount}
+    val data by remember { viewModel.product }
+    val score by remember { viewModel.productScore }
+    val likeCount by remember { viewModel.likeCount }
     Surface(
-        color = Color.White, modifier = Modifier
+        color = Color.White,
+        modifier = Modifier
             .background(color = Color.White)
     ) {
         Column(modifier = Modifier.padding(10.dp)) {
             Text(
-                text =data.productName,
+                text = data.productName,
                 modifier = Modifier
                     .wrapContentWidth(),
                 textAlign = TextAlign.Start,
@@ -45,7 +46,7 @@ fun ItemTopAttr(viewModel: ProductDetailViewModel = hiltViewModel()) {
             )
 
             Text(
-                text =  data.productMinDeclaration,
+                text = data.productMinDeclaration,
                 modifier = Modifier
                     .wrapContentWidth()
                     .alpha(0.5f),
@@ -57,7 +58,7 @@ fun ItemTopAttr(viewModel: ProductDetailViewModel = hiltViewModel()) {
             ) {
 
                 Text(
-                    text ="%.2f".format(score) ,
+                    text = "%.2f".format(score),
                     modifier = Modifier
                         .wrapContentWidth(),
                     textAlign = TextAlign.Start,
@@ -65,14 +66,15 @@ fun ItemTopAttr(viewModel: ProductDetailViewModel = hiltViewModel()) {
 
                 )
                 RatingBar(
-                        rating = score.toInt(),
-                        modifier = Modifier.width(13.dp),
-                        clickable = false,
-                        animate = false
-                    )
+                    rating = score.toInt(),
+                    modifier = Modifier.width(13.dp),
+                    clickable = false,
+                    animate = false
+                )
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth(), horizontalArrangement = Arrangement.End
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
                 ) {
                     Image(
                         painterResource(R.drawable.ic_baseline_favorite_border_24),
@@ -83,10 +85,7 @@ fun ItemTopAttr(viewModel: ProductDetailViewModel = hiltViewModel()) {
                         text = likeCount.toString(),
                         fontSize = 14.sp
                     )
-
                 }
-
-
             }
             Row() {
                 Text(
@@ -97,7 +96,7 @@ fun ItemTopAttr(viewModel: ProductDetailViewModel = hiltViewModel()) {
                     textAlign = TextAlign.Start,
                     fontSize = 14.sp
                 )
-                if(data.productDiscountRate!=0){
+                if (data.productDiscountRate != 0) {
                     Text(
                         text = "%${data.productDiscountRate} indirim ile",
                         modifier = Modifier
@@ -105,8 +104,7 @@ fun ItemTopAttr(viewModel: ProductDetailViewModel = hiltViewModel()) {
                         textAlign = TextAlign.Start,
                         fontSize = 14.sp
                     )
-
-                }else{
+                } else {
                     Text(
                         text = "${data.productPrice} ",
                         modifier = Modifier
@@ -115,9 +113,8 @@ fun ItemTopAttr(viewModel: ProductDetailViewModel = hiltViewModel()) {
                         fontSize = 14.sp
                     )
                 }
-
             }
-            if(data.productDiscountRate!=0){
+            if (data.productDiscountRate != 0) {
                 Text(
                     text = data.productPrice.toString(),
                     modifier = Modifier
@@ -134,8 +131,6 @@ fun ItemTopAttr(viewModel: ProductDetailViewModel = hiltViewModel()) {
                     fontSize = 14.sp
                 )
             }
-
         }
-
     }
 }

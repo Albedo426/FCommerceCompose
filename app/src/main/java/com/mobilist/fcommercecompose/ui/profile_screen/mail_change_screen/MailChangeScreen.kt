@@ -15,8 +15,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.mobilist.fcommercecompose.R
 import com.mobilist.fcommercecompose.ui.components.button.BasicButton
+import com.mobilist.fcommercecompose.ui.components.cards.ProductListView
 import com.mobilist.fcommercecompose.ui.components.dialog.CustomDialog
 import com.mobilist.fcommercecompose.ui.components.error_components.ErrorBasicComponent
+import com.mobilist.fcommercecompose.ui.components.error_components.ErrorControllerBasicComponent
 import com.mobilist.fcommercecompose.ui.components.error_components.ErrorOnlyTextComponent
 import com.mobilist.fcommercecompose.ui.components.top_bar.BasicTopBar
 import com.mobilist.fcommercecompose.ui.main_screen.bottom_navigate_bar.NavigationItem
@@ -34,12 +36,7 @@ fun MailChangeScreen(
     var error by remember { viewModel.errorMessage }
     val loading by remember { viewModel.isLoading }
     Column(Modifier.fillMaxSize()) {
-        if (error != "") {
-            ErrorBasicComponent(loading, error) {
-                error = ""
-            }
-        } else {
-
+        ErrorControllerBasicComponent(loading, error, onClick = {  error = "" }) {
             MainContentMailChangeScreen(navController, viewModel)
         }
     }

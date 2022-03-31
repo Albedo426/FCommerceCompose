@@ -8,7 +8,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.mobilist.fcommercecompose.ui.categories_screen.category_product.search_category_product_screen.SearchCategoryProductScreen
@@ -24,13 +23,12 @@ import com.mobilist.fcommercecompose.ui.profile_screen.address_change_screen.add
 import com.mobilist.fcommercecompose.ui.register_screen.RegisterScreen
 import com.mobilist.fcommercecompose.ui.splah_screen.SplashScreen
 
-
 @ExperimentalFoundationApi
 @ExperimentalPagerApi
 @ExperimentalComposeUiApi
 @Composable
 // burası main kısmı bottom olmayan salt sayfalar açar
-fun NavigationMainActivity(navController: NavHostController) {//  navcontrollerMain bu
+fun NavigationMainActivity(navController: NavHostController) { //  navcontrollerMain bu
     NavHost(navController = navController, startDestination = "splash_screen") {
         composable("login_screen") {
             LoginScreen(navController = navController)
@@ -48,27 +46,32 @@ fun NavigationMainActivity(navController: NavHostController) {//  navcontrollerM
         composable("address_add_screen") {
             AddressAddScreen(navController)
         }
-        composable("detail_product_screen/{Id}", arguments = listOf(
-            navArgument("Id") {
-                type = NavType.IntType
-            }
-        )) {
+        composable(
+            "detail_product_screen/{Id}",
+            arguments = listOf(
+                navArgument("Id") {
+                    type = NavType.IntType
+                }
+            )
+        ) {
             val id = remember {
-                it.arguments?.getInt("Id",0)
+                it.arguments?.getInt("Id", 0)
             }
-            ProductDetail(navController = navController,Id= id!!)
+            ProductDetail(navController = navController, Id = id!!)
         }
-        composable("shopping_list_screen/{Id}", arguments = listOf(
-            navArgument("Id") {
-                type = NavType.IntType
-            }
-        )) {
+        composable(
+            "shopping_list_screen/{Id}",
+            arguments = listOf(
+                navArgument("Id") {
+                    type = NavType.IntType
+                }
+            )
+        ) {
             val id = remember {
-                it.arguments?.getInt("Id",0)
+                it.arguments?.getInt("Id", 0)
             }
-            OrderScreen(navController = navController,id!!)
+            OrderScreen(navController = navController, id!!)
         }
-
 
         composable("shopping_detail_list_screen",) {
             OrderDetailScreen(navController = navController)
@@ -82,15 +85,18 @@ fun NavigationMainActivity(navController: NavHostController) {//  navcontrollerM
         composable("search_favorite_screen") {
             SearchFavoriteScreen(navController = navController)
         }
-        composable("search_category_screen/{Id}", arguments = listOf(
-            navArgument("Id") {
-                type = NavType.IntType
-            }
-        )) {
+        composable(
+            "search_category_screen/{Id}",
+            arguments = listOf(
+                navArgument("Id") {
+                    type = NavType.IntType
+                }
+            )
+        ) {
             val id = remember {
-                it.arguments?.getInt("Id",0)
+                it.arguments?.getInt("Id", 0)
             }
-            SearchCategoryProductScreen(navController = navController,id!!)
+            SearchCategoryProductScreen(navController = navController, id!!)
         }
     }
 }

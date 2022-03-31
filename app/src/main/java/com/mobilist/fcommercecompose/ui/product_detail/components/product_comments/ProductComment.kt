@@ -19,21 +19,23 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.mobilist.fcommercecompose.ui.components.line_component.MySpacerHorizontal
 import com.mobilist.fcommercecompose.ui.product_detail.ProductDetailViewModel
 
-
 @ExperimentalComposeUiApi
 @Composable
 fun ProductComment(viewModel: ProductDetailViewModel = hiltViewModel()) {
-    val data by remember {viewModel.comments}// image var bunda ona göre ad değiştir
+    val data by remember { viewModel.comments } // image var bunda ona göre ad değiştir
 
     Surface(
-        color = Color.White, modifier = Modifier
+        color = Color.White,
+        modifier = Modifier
             .background(color = Color.White).padding(10.dp)
     ) {
 
         Column() {
-            Row(  modifier = Modifier
-                .fillMaxWidth(),
-                horizontalArrangement  =  Arrangement.SpaceBetween) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Text(
                     text = "Ürün Yorumları",
                     modifier = Modifier
@@ -53,14 +55,12 @@ fun ProductComment(viewModel: ProductDetailViewModel = hiltViewModel()) {
                 )
             }
             MySpacerHorizontal()
-            if(data.isNotEmpty()){
+            if (data.isNotEmpty()) {
                 ProductDetailComments(data)
-                Text(text = "Tüm Yorumları Gör",textAlign = TextAlign.Center,modifier = Modifier.fillMaxWidth().padding(10.dp).alpha(0.8f),fontSize = 16.sp)
-            }else{
-                Text(text = "Henüz Yorum Yapılmamış",textAlign = TextAlign.Center,modifier = Modifier.fillMaxWidth().padding(10.dp).alpha(0.8f),fontSize = 16.sp)
-
+                Text(text = "Tüm Yorumları Gör", textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().padding(10.dp).alpha(0.8f), fontSize = 16.sp)
+            } else {
+                Text(text = "Henüz Yorum Yapılmamış", textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().padding(10.dp).alpha(0.8f), fontSize = 16.sp)
             }
         }
     }
-
 }

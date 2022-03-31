@@ -17,8 +17,6 @@ class MyLikeButtonViewModel @Inject constructor(
     var favoriteRepositoryImpl: FavoriteRepositoryImpl
 ) : BaseViewModel(application) {
 
-    var errorMessage = mutableStateOf("")
-    var isLoading = mutableStateOf(false)
     var booleanClick = mutableStateOf(false)
 
     fun likeClick(ProductId: Int) {

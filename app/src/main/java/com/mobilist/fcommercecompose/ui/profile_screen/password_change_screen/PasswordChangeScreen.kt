@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Card
-import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,14 +15,9 @@ import androidx.navigation.NavHostController
 import com.mobilist.fcommercecompose.R
 import com.mobilist.fcommercecompose.ui.components.button.BasicButton
 import com.mobilist.fcommercecompose.ui.components.dialog.CustomDialog
-import com.mobilist.fcommercecompose.ui.components.error_components.ErrorBasicComponent
-import com.mobilist.fcommercecompose.ui.components.error_components.ErrorOnlyTextComponent
+import com.mobilist.fcommercecompose.ui.components.error_components.ErrorControllerBasicComponent
 import com.mobilist.fcommercecompose.ui.components.top_bar.BasicTopBar
-import com.mobilist.fcommercecompose.ui.main_screen.bottom_navigate_bar.NavigationItem
 import com.mobilist.fcommercecompose.ui.profile_screen.password_change_screen.component.TextPasswordOutlined
-import com.mobilist.fcommercecompose.ui.profile_screen.user_change_screen.MainContentUserChangeScreen
-import com.mobilist.fcommercecompose.ui.profile_screen.user_change_screen.UserChangeAttr
-import com.mobilist.fcommercecompose.ui.profile_screen.user_change_screen.UserChangeViewModel
 
 @Composable
 fun PasswordChangeScreen(
@@ -33,15 +27,10 @@ fun PasswordChangeScreen(
 
     var error by remember { viewModel.errorMessage }
     val loading by remember { viewModel.isLoading }
-    if (error != "" || loading) {
-        ErrorBasicComponent(loading, error) {
-            error = ""
-        }
-    } else {
+    ErrorControllerBasicComponent(loading, error, onClick = { error = "" }) {
         MainContentPasswordChangeScreen(navController, viewModel)
     }
 }
-
 
 @Composable
 fun MainContentPasswordChangeScreen(
@@ -76,7 +65,8 @@ fun PasswordScreenAttr(openDialog: MutableState<Boolean>, viewModel: PasswordCha
     var tempPassword2 by remember { mutableStateOf("") }
     var mainPass by remember { mutableStateOf("") }
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
             .fillMaxWidth()
             .padding(5.dp)
     ) {
@@ -85,13 +75,13 @@ fun PasswordScreenAttr(openDialog: MutableState<Boolean>, viewModel: PasswordCha
         ) {
             Column(modifier = Modifier.padding(top = 10.dp)) {
                 TextPasswordOutlined(text = "Mevcut Şifre") {
-                    mainPass = it;
+                    mainPass = it
                 }
                 TextPasswordOutlined(text = "Yeni Şifre") {
-                    tempPassword = it;
+                    tempPassword = it
                 }
                 TextPasswordOutlined(text = "Tekrar Yeni Şifre") {
-                    tempPassword2 = it;
+                    tempPassword2 = it
                 }
                 BasicButton(text = "Güncelle") {
                     if (tempPassword == tempPassword2) {

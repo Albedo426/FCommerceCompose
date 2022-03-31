@@ -20,12 +20,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.mobilist.fcommercecompose.ui.components.line_component.MySpacerHorizontal
 import com.mobilist.fcommercecompose.ui.product_detail.ProductDetailViewModel
 
-//ayri ayri yap
+
 @Composable
 fun ProductAttr(viewModel: ProductDetailViewModel = hiltViewModel()) {
     val data by remember { viewModel.product }
     Surface(
-        color = Color.White, modifier = Modifier
+        color = Color.White,
+        modifier = Modifier
             .background(color = Color.White)
     ) {
 
@@ -40,12 +41,14 @@ fun ProductAttr(viewModel: ProductDetailViewModel = hiltViewModel()) {
                 fontSize = 18.sp
             )
             MySpacerHorizontal()
-            val str =data.declaration
+            val str = data.declaration
             for (attrString in str.split("|").toTypedArray()) {
                 Row(Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Canvas(modifier = Modifier
-                        .padding(start = 8.dp, end = 8.dp)
-                        .size(6.dp)) {
+                    Canvas(
+                        modifier = Modifier
+                            .padding(start = 8.dp, end = 8.dp)
+                            .size(6.dp)
+                    ) {
                         drawCircle(Color.Black)
                     }
                     Text(
@@ -58,7 +61,6 @@ fun ProductAttr(viewModel: ProductDetailViewModel = hiltViewModel()) {
                     )
                 }
             }
-
         }
     }
 }

@@ -18,13 +18,11 @@ class LoginViewModel @Inject constructor(
     var userRepositoryImpl: UserRepositoryImpl
 ) : BaseViewModel(application) {
     var loginModel = LoginModel("", "")
-    var errorMessage = mutableStateOf("")
-    var isLoading = mutableStateOf(false)
     var succses = mutableStateOf(false)
     init {
         // ilk yüklendiğinde çalışmıyor
         launch {
-            if(customSharedPreferences.getReadyDataToken()!=0){
+            if (customSharedPreferences.getReadyDataToken() != 0) {
                 userRepositoryImpl.init()
                 customSharedPreferences.addDataToken()
             }

@@ -17,12 +17,12 @@ import com.mobilist.fcommercecompose.R
 import com.mobilist.fcommercecompose.data.entity.sales.StateOrder
 import com.mobilist.fcommercecompose.data.model.toDetailProductModel
 import com.mobilist.fcommercecompose.ui.components.button.BasicButton
+import com.mobilist.fcommercecompose.ui.components.cards.ImagePager
 import com.mobilist.fcommercecompose.ui.components.dialog.CustomDialog
 import com.mobilist.fcommercecompose.ui.components.dropdown_list.DropDownOnlyString
 import com.mobilist.fcommercecompose.ui.components.line_component.MySpacerHorizontal
 import com.mobilist.fcommercecompose.ui.components.text.BasicOutlinedText
 import com.mobilist.fcommercecompose.ui.components.text.Title
-import com.mobilist.fcommercecompose.ui.product_detail.components.detail_images.ImagePager
 import com.mobilist.fcommercecompose.ui.profile_screen.incoming_order_screen.change_order_status_screen.ChangeOrderStatusViewModel
 
 @ExperimentalPagerApi
@@ -46,7 +46,7 @@ fun OrderItem(
         Column(
             modifier = Modifier.padding(5.dp)
         ) {
-            ImagePager(state = state, data = images.map { it.productImagePath },order.toDetailProductModel())
+            ImagePager(state = state, data = images.map { it.productImagePath }, order.toDetailProductModel())
             Row(horizontalArrangement = Arrangement.SpaceBetween) {
                 Title(mainText = order.productName)
             }
@@ -58,7 +58,8 @@ fun OrderItem(
             ) {
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
                         text = "Sipariş tarihi: ${order.orderDate}",
@@ -82,9 +83,11 @@ fun OrderItem(
                 )
                 StateOrder.values()
                     .firstOrNull { it.ordinal == order.orderStatus }?.name?.let {
-                        DropDownOnlyString(text = "Ürün Durumu Değiştir",
+                        DropDownOnlyString(
+                            text = "Ürün Durumu Değiştir",
                             showString = it,
-                            listAddress = StateOrder.values().map { it.name }) {
+                            listAddress = StateOrder.values().map { it.name }
+                        ) {
                             order.orderStatus = StateOrder.valueOf(it).ordinal
                         }
                     }
@@ -99,15 +102,16 @@ fun OrderItem(
                     modifier = Modifier
                         .padding(vertical = 10.dp)
                         .padding(5.dp)
-                        .fillMaxWidth(), text = "Kaydet"
+                        .fillMaxWidth(),
+                    text = "Kaydet"
                 ) {
                     viewModel.saveOrder(openDialog)
-                    openDialog.value=true
+                    openDialog.value = true
                 }
             }
         }
         if (openDialog.value) {
-            CustomDialog(openDialog= openDialog ,text="Sipariş İşlemi Başarılı", acceptText = "Tamam", Image = R.drawable.ic_baseline_success_24 ){
+            CustomDialog(openDialog = openDialog, text = "Sipariş İşlemi Başarılı", acceptText = "Tamam", Image = R.drawable.ic_baseline_success_24) {
                 navController.navigate("in_coming_order_screen") {
                     popUpTo("change_order_status_screen") {
                         inclusive = true
@@ -116,5 +120,4 @@ fun OrderItem(
             }
         }
     }
-
 }

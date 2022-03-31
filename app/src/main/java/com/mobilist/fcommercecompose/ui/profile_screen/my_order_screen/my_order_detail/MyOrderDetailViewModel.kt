@@ -23,8 +23,7 @@ class MyOrderDetailViewModel @Inject constructor(
     var cargoName = mutableStateOf("")
     var trackingNumber = mutableStateOf("")
     var listImage = mutableStateOf<List<ProductImagesModel>>(listOf())
-    var errorMessage = mutableStateOf("")
-    var isLoading = mutableStateOf(false)
+
 
     private suspend fun loadImage(Id: Int) {
         imageController.getProductImages(

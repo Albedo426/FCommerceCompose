@@ -17,42 +17,40 @@ class CategoryViewModel @Inject constructor(
 
 ) : BaseViewModel(application) {
     var list = mutableStateOf<List<Category>>(listOf())
-    var errorMessage = mutableStateOf("")
-    var isLoading = mutableStateOf(false)
-    init{
+    init {
         getAllMainCategories()
     }
     private fun getAllMainCategories() {
         launch {
-            isLoading.value=true
+            isLoading.value = true
             launch {
-                when(val result=categoryRepositoryImpl.getCategoriesMainProduct()){
-                    is Resource.Success->{
-                        list.value=result.data!!
-                        errorMessage.value=""
+                when (val result = categoryRepositoryImpl.getCategoriesMainProduct()) {
+                    is Resource.Success -> {
+                        list.value = result.data!!
+                        errorMessage.value = ""
                     }
-                    is Resource.Error->{
-                        errorMessage.value=result.message!!
+                    is Resource.Error -> {
+                        errorMessage.value = result.message!!
                     }
                 }
-                isLoading.value=false
+                isLoading.value = false
             }
         }
     }
-     fun searchCategoryMain(str:String) {
+    fun searchCategoryMain(str: String) {
         launch {
-            isLoading.value=true
+            isLoading.value = true
             launch {
-                when(val result=categoryRepositoryImpl.searchCategoriesMainProduct(str)){
-                    is Resource.Success->{
-                        list.value=result.data!!
-                        errorMessage.value=""
+                when (val result = categoryRepositoryImpl.searchCategoriesMainProduct(str)) {
+                    is Resource.Success -> {
+                        list.value = result.data!!
+                        errorMessage.value = ""
                     }
-                    is Resource.Error->{
-                        errorMessage.value=result.message!!
+                    is Resource.Error -> {
+                        errorMessage.value = result.message!!
                     }
                 }
-                isLoading.value=false
+                isLoading.value = false
             }
         }
     }

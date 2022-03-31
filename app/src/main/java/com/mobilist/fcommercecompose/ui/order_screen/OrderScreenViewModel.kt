@@ -2,10 +2,10 @@ package com.mobilist.fcommercecompose.ui.order_screen
 
 import android.app.Application
 import androidx.compose.runtime.mutableStateOf
-import com.mobilist.fcommercecompose.util.CustomSharedPreferences
 import com.mobilist.fcommercecompose.base.BaseViewModel
 import com.mobilist.fcommercecompose.data.model.*
 import com.mobilist.fcommercecompose.services.repo.order.OrderRepositoryImpl
+import com.mobilist.fcommercecompose.util.CustomSharedPreferences
 import com.mobilist.fcommercecompose.util.Resource
 import com.mobilist.fcommercecompose.util.percentageDouble
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,8 +20,6 @@ class OrderScreenViewModel @Inject constructor(
 ) : BaseViewModel(application) {
 
     var list = mutableStateOf<List<RequestOrderModel>>(listOf())
-    var errorMessage = mutableStateOf("")
-    var isLoading = mutableStateOf(false)
     var allPrice = mutableStateOf(0.0)
 
     private suspend fun quantityController(plus: Boolean, price: Double, UUID: Int): Resource<Boolean> {

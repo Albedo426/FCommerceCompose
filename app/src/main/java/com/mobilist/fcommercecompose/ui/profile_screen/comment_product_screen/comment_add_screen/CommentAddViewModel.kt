@@ -20,8 +20,6 @@ class CommentAddViewModel @Inject constructor(
 ) : BaseViewModel(application) {
 
     var list = mutableStateOf(CommentProductModel())
-    var errorMessage = mutableStateOf("")
-    var isLoading = mutableStateOf(false)
     var point = mutableStateOf(1)
     var text = mutableStateOf("")
 

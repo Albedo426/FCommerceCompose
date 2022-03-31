@@ -17,5 +17,4 @@ fun ProductDetailComments(list: List<CommentDetailModel>) {
             MySpacerHorizontal()
         }
     }
-
 }

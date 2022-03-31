@@ -19,8 +19,6 @@ class MyOrderViewModel @Inject constructor(
 ) : BaseViewModel(application) {
 
     var list = mutableStateOf<List<RequestOrderModel>>(listOf())
-    var errorMessage = mutableStateOf("")
-    var isLoading = mutableStateOf(false)
 
     fun loadShoppingList() {
         launch {

@@ -32,14 +32,14 @@ fun TextPassword(
         singleLine = true,
         value = password,
         colors = TextFieldDefaults.textFieldColors(
-            textColor = colorResource(R.color.text_color),
+            textColor = colorResource(R.color.text_colorDark),
             disabledTextColor = Color.Transparent,
             backgroundColor = colorResource(R.color.white),
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent
         ),
-        onValueChange = { password = it;textChange(password) },
+        onValueChange = { password = it; textChange(password) },
         // label = { Text(text,color = colorResource(R.color.text_color)) },
         placeholder = { Text(text, color = colorResource(R.color.text_colorDark)) },
         modifier = modifier.border(
@@ -47,7 +47,7 @@ fun TextPassword(
             color = colorResource(R.color.text_border_color),
             shape = RoundedCornerShape(border)
         ),
-        shape = RoundedCornerShape(border),//50
+        shape = RoundedCornerShape(border), // 50
         visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         trailingIcon = {

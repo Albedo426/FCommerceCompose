@@ -8,12 +8,12 @@ import java.time.format.DateTimeFormatter
 import kotlin.math.round
 fun NavOptionsBuilder.popUpToTop(navController: NavController) {
     popUpTo(navController.currentBackStackEntry?.destination?.route ?: return) {
-        inclusive =  true
+        inclusive = true
     }
 }
 
-fun String.getNowTimeString():String{
-    val order= OrderModel()
+fun String.getNowTimeString(): String {
+    val order = OrderModel()
     val current = LocalDateTime.now()
 
     val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
@@ -26,11 +26,11 @@ fun Double.round(decimals: Int): Double {
 }
 
 fun Double.percentage(percentage: Int): String {
-    var l=1.0
-    if(percentage!=0){
-        l = percentage.toDouble()/100
+    var l = 1.0
+    if (percentage != 0) {
+        l = percentage.toDouble() / 100
     }
-    val price =this*l
+    val price = this * l
     return "%.2f".format(price)
 }
 fun Double.percentageDouble(percentage: Int): Double {
@@ -40,7 +40,6 @@ fun Double.percentageDouble(percentage: Int): Double {
     }
     return this * l
 }
-
 
 /*
 fun ImageView.downloadFromUrl(url:String?, circularProgressDrawable: CircularProgressDrawable){

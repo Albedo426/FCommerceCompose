@@ -7,7 +7,6 @@ import com.mobilist.fcommercecompose.services.repo.product.ProductRepositoryImpl
 import com.mobilist.fcommercecompose.util.Resource
 import javax.inject.Inject
 
-
 class ImageController @Inject constructor(
     var productRepositoryImpl: ProductRepositoryImpl
 ) {
@@ -18,8 +17,10 @@ class ImageController @Inject constructor(
         Id: Int
     ) {
         isLoading.value = true
-        when (val result =
-            productRepositoryImpl.getImageByProductId(Id)) {
+        when (
+            val result =
+                productRepositoryImpl.getImageByProductId(Id)
+        ) {
             is Resource.Success -> {
                 listImage.value = result.data!!.map { it.toProductImagesModel() }
                 fatalErrorMessage.value = ""
@@ -30,5 +31,4 @@ class ImageController @Inject constructor(
         }
         isLoading.value = false
     }
-
 }

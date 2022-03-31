@@ -31,22 +31,23 @@ import coil.compose.rememberImagePainter
 import com.mobilist.fcommercecompose.R
 import com.mobilist.fcommercecompose.data.model.ProductMainItemModel
 import com.mobilist.fcommercecompose.ui.MyLikeButtonViewModel
+import com.mobilist.fcommercecompose.ui.components.button.MyLikeButton
 import com.mobilist.fcommercecompose.ui.home_screen.home_product_screen.HomeProductViewModel
 import com.mobilist.fcommercecompose.util.percentage
 
-//shape = RoundedCornerShape(25),
+// shape = RoundedCornerShape(25),
 @Composable
-fun ItemProductHome(navController: NavController, item: ProductMainItemModel,viewModel:HomeProductViewModel= hiltViewModel()) {//navController: NavController
-    val circleInt=remember{5}
-    Card(shape =RoundedCornerShape(circleInt) ,modifier = Modifier
-        .padding(10.dp)) {
-        Box( ) {
-            Column(
-                modifier = Modifier
-                    //.background(color = Color.DarkGray)
-                    ) {
+fun ItemProductHome(navController: NavController, item: ProductMainItemModel, viewModel: HomeProductViewModel = hiltViewModel()) { // navController: NavController
+    val circleInt = remember { 5 }
+    Card(
+        shape = RoundedCornerShape(circleInt),
+        modifier = Modifier
+            .padding(10.dp)
+    ) {
+        Box() {
+            Column() {
                 Image(
-                  contentScale = ContentScale.Crop,
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .height(200.dp)
                         .clip(
@@ -58,11 +59,12 @@ fun ItemProductHome(navController: NavController, item: ProductMainItemModel,vie
                         .clickable {
                             navController.navigate("detail_product_screen/${item.UUID}")
                         },
-                            painter = rememberImagePainter(data =item.coverImagePath),
+                    painter = rememberImagePainter(data = item.coverImagePath),
                     contentDescription = ""
                 )
                 Row(
-                    horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(5.dp)
                 ) {
@@ -70,6 +72,7 @@ fun ItemProductHome(navController: NavController, item: ProductMainItemModel,vie
                         item.productName,
                         fontWeight = FontWeight.Bold,
                         fontSize = 15.sp,
+                        maxLines = 2,
                         modifier = Modifier
                             .width(100.dp)
                             .clickable {
@@ -77,32 +80,33 @@ fun ItemProductHome(navController: NavController, item: ProductMainItemModel,vie
                             }
                     )
                     Column() {
-                        if(item.productDiscountRate==0){
-                            Text("%.2f".format(item.productPrice),
+                        if (item.productDiscountRate == 0) {
+                            Text(
+                                "%.2f".format(item.productPrice),
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 15.sp,
-                                color=colorResource(id = R.color.text_colorDark)
+                                color = colorResource(id = R.color.text_colorDark)
                             )
-                        }else{
+                        } else {
                             Text(
                                 item.productPrice.percentage(item.productDiscountRate),
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 15.sp,
-                                color=colorResource(id = R.color.text_colorDark)
+                                color = colorResource(id = R.color.text_colorDark)
                             )
                             Text(
                                 "%.2f".format(item.productPrice),
                                 fontWeight = FontWeight.Bold,
                                 style = TextStyle(textDecoration = TextDecoration.LineThrough),
                                 fontSize = 10.sp,
-                                color = Color.Gray,modifier = Modifier.align(Alignment.End)
+                                color = Color.Gray, modifier = Modifier.align(Alignment.End)
                             )
                         }
                     }
-
                 }
                 Row(
-                    horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(6.dp)
                 ) {
@@ -120,37 +124,18 @@ fun ItemProductHome(navController: NavController, item: ProductMainItemModel,vie
 
                         color = colorResource(id = R.color.mainBlue),
                         modifier = Modifier.clickable {
-                            viewModel.addOrder(navController, item.UUID )
+                            viewModel.addOrder(navController, item.UUID)
                         }
                     )
                 }
             }
-
-            val isLike=remember{ mutableStateOf( item.isLike!=null) }
-            MyLikeButton(modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(5.dp),isLike,item.UUID)
+            val isLike = remember { mutableStateOf(item.isLike != null) }
+            MyLikeButton(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(5.dp),
+                isLike, item.UUID
+            )
         }
     }
 }
-
-@SuppressLint("RememberReturnType")
-@Composable
-fun MyLikeButton(modifier :Modifier,booleanClick:MutableState<Boolean>,Id:Int,myLikeButtonViewModel: MyLikeButtonViewModel= hiltViewModel()) {
-    Card(modifier = modifier
-        .clip(CircleShape)
-        .clickable {
-            booleanClick.value = !booleanClick.value
-            myLikeButtonViewModel.likeClick(Id)
-            //  navController.navigate("crypto_detail_screen/${cryptoListItem.currency}/${cryptoListItem.price}")
-        }){
-        if(booleanClick.value){
-            Image(painterResource(R.drawable.ic_baseline_item_favorite_24),
-                contentDescription = "", modifier = Modifier.padding(3.dp), colorFilter = ColorFilter.tint(Color.Red))
-        }else{
-            Image(painterResource(R.drawable.ic_baseline_favorite_border_24),
-                contentDescription = "", modifier = Modifier.padding(3.dp))
-        }
-    }
-}
-

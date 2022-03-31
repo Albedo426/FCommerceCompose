@@ -25,9 +25,6 @@ class OrderDetailViewModel @Inject constructor(
     var listAddress = mutableStateOf<List<UserAddressModel>>(listOf())
     private var listOrder = mutableStateOf<List<RequestOrderModel>>(listOf())
 
-    var errorMessage = mutableStateOf("")
-    var isLoading = mutableStateOf(false)
-
     var allPrice = mutableStateOf(0.0)
 
     var billAddressId = mutableStateOf(0)
@@ -43,7 +40,7 @@ class OrderDetailViewModel @Inject constructor(
             when (
                 val result =
                     orderRepositoryImpl.updateOrderStatus(
-                        0, billAddressId.value, shipAddressId.value,
+                        1, billAddressId.value, shipAddressId.value,
                         listOrder.value.map { it.UUID }.toIntArray()
                     )
             ) {
