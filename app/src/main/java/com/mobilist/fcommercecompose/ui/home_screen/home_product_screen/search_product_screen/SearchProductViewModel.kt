@@ -2,10 +2,8 @@ package com.mobilist.fcommercecompose.ui.home_screen.home_product_screen.search_
 
 import android.app.Application
 import androidx.compose.runtime.mutableStateOf
-import androidx.navigation.NavController
-import com.mobilist.fcommerce.util.CustomSharedPreferences
+import com.mobilist.fcommercecompose.util.CustomSharedPreferences
 import com.mobilist.fcommercecompose.base.BaseViewModel
-import com.mobilist.fcommercecompose.controller.product.order.OrderController
 import com.mobilist.fcommercecompose.data.entity.product.toProductMainItem
 import com.mobilist.fcommercecompose.data.model.ProductMainItemModel
 import com.mobilist.fcommercecompose.services.repo.product.ProductRepositoryImpl

@@ -1,19 +1,13 @@
 package com.mobilist.fcommercecompose.ui.profile_screen
 
 import android.app.Application
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import com.mobilist.fcommerce.util.CustomSharedPreferences
+import com.mobilist.fcommercecompose.util.CustomSharedPreferences
 import com.mobilist.fcommercecompose.base.BaseViewModel
 import com.mobilist.fcommercecompose.controller.user.UserController
 import com.mobilist.fcommercecompose.data.entity.user.User
-import com.mobilist.fcommercecompose.data.model.LoginModel
-import com.mobilist.fcommercecompose.services.repo.product.ProductRepositoryImpl
 import com.mobilist.fcommercecompose.services.repo.user.UserRepositoryImpl
-import com.mobilist.fcommercecompose.ui.main_screen.bottom_navigate_bar.NavigationItem
-import com.mobilist.fcommercecompose.util.Resource
 import com.mobilist.fcommercecompose.util.popUpToTop
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

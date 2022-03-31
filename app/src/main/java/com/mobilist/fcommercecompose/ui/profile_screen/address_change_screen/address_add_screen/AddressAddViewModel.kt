@@ -3,13 +3,11 @@ package com.mobilist.fcommercecompose.ui.profile_screen.address_change_screen.ad
 import android.app.Application
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.navigation.NavHostController
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.mobilist.fcommerce.util.CustomSharedPreferences
+import com.mobilist.fcommercecompose.util.CustomSharedPreferences
 import com.mobilist.fcommercecompose.base.BaseViewModel
 import com.mobilist.fcommercecompose.controller.user.AddressController
-import com.mobilist.fcommercecompose.data.entity.sales.StateOrder
 import com.mobilist.fcommercecompose.data.entity.user.Address
 import com.mobilist.fcommercecompose.data.model.City
 import com.mobilist.fcommercecompose.data.model.MyCity

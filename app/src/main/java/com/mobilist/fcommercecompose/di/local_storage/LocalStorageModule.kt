@@ -1,7 +1,7 @@
 package com.mobilist.fcommercecompose.di.local_storage
 
 import android.content.Context
-import com.mobilist.fcommerce.util.CustomSharedPreferences
+import com.mobilist.fcommercecompose.util.CustomSharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

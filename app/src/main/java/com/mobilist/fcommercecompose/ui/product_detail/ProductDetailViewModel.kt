@@ -3,7 +3,7 @@ package com.mobilist.fcommercecompose.ui.product_detail
 import android.app.Application
 import androidx.compose.runtime.mutableStateOf
 import androidx.navigation.NavController
-import com.mobilist.fcommerce.util.CustomSharedPreferences
+import com.mobilist.fcommercecompose.util.CustomSharedPreferences
 import com.mobilist.fcommercecompose.base.BaseViewModel
 import com.mobilist.fcommercecompose.controller.product.image.ImageController
 import com.mobilist.fcommercecompose.controller.product.order.OrderController

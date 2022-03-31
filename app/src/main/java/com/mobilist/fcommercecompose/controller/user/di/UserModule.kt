@@ -1,6 +1,6 @@
 package com.mobilist.fcommercecompose.controller.user.di
 
-import com.mobilist.fcommerce.util.CustomSharedPreferences
+import com.mobilist.fcommercecompose.util.CustomSharedPreferences
 import com.mobilist.fcommercecompose.controller.user.UserController
 import com.mobilist.fcommercecompose.services.repo.user.UserRepositoryImpl
 import dagger.Module

@@ -1,13 +1,12 @@
 package com.mobilist.fcommercecompose.ui.login_screen
 
 import android.app.Application
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
-import com.mobilist.fcommerce.util.CustomSharedPreferences
-import com.mobilist.fcommercecompose.util.Resource
 import com.mobilist.fcommercecompose.base.BaseViewModel
 import com.mobilist.fcommercecompose.data.model.LoginModel
 import com.mobilist.fcommercecompose.services.repo.user.UserRepositoryImpl
+import com.mobilist.fcommercecompose.util.CustomSharedPreferences
+import com.mobilist.fcommercecompose.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,16 +21,19 @@ class LoginViewModel @Inject constructor(
     var errorMessage = mutableStateOf("")
     var isLoading = mutableStateOf(false)
     var succses = mutableStateOf(false)
-    init{
-        //ilk yüklendiğinde çalışmıyor
+    init {
+        // ilk yüklendiğinde çalışmıyor
         launch {
-         userRepositoryImpl.init()
+            if(customSharedPreferences.getReadyDataToken()!=0){
+                userRepositoryImpl.init()
+                customSharedPreferences.addDataToken()
+            }
         }
     }
     fun login() {
         isLoading.value = true
         launch {
-            println(userRepositoryImpl.getAllUser())//system.out
+            println(userRepositoryImpl.getAllUser()) // system.out
             when (val result = userRepositoryImpl.loginUser(loginModel)) {
                 is Resource.Success -> {
                     val myUser = result.data
@@ -40,7 +42,7 @@ class LoginViewModel @Inject constructor(
                     }
                     println("girdiiii")
                     errorMessage.value = ""
-                    succses.value=true
+                    succses.value = true
                     isLoading.value = false
                 }
                 is Resource.Error -> {

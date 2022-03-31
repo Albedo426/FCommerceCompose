@@ -2,7 +2,7 @@ package com.mobilist.fcommercecompose.ui
 
 import android.app.Application
 import androidx.compose.runtime.mutableStateOf
-import com.mobilist.fcommerce.util.CustomSharedPreferences
+import com.mobilist.fcommercecompose.util.CustomSharedPreferences
 import com.mobilist.fcommercecompose.base.BaseViewModel
 import com.mobilist.fcommercecompose.services.repo.favorite.FavoriteRepositoryImpl
 import com.mobilist.fcommercecompose.util.Resource
