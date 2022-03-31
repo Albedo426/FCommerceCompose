@@ -3,9 +3,6 @@ package com.mobilist.fcommercecompose.services.room.product_api
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.mobilist.fcommercecompose.data.entity.informative.Comment
-import com.mobilist.fcommercecompose.data.entity.informative.Like
-import com.mobilist.fcommercecompose.data.entity.informative.Score
 import com.mobilist.fcommercecompose.data.entity.product.Product
 import com.mobilist.fcommercecompose.data.entity.product.ProductImage
 import com.mobilist.fcommercecompose.data.entity.product.ProductMainItem
@@ -16,9 +13,11 @@ interface ProductDao {
     @Insert
     suspend fun insert(product: Product): Long
 
-
     @Insert
     suspend fun insertAllProduct(vararg product: Product): List<Long>
+    // score
+    @Query("SELECT AVG(scorePoint) FROM 'Score' where product=:Id")
+    suspend fun getProductScoreCountById(Id: Int): Double
 
     @Query("SELECT * FROM Product")
     suspend fun getAllProduct(): List<Product>
@@ -28,33 +27,6 @@ interface ProductDao {
 
     @Query("select Product.productName ,Product.productMinDeclaration,Product.UUID ,quantity,ProductPrice.productPrice,ProductPrice.productDiscountRate,finishDate,startDate,coverImagePath,(select UUID from `Like` as myLike where myLike.product=Product.UUID  and  myLike.user=:Id ) as isLike from Product inner join ProductPrice on Product.UUID=ProductPrice.product where Product.productName LIKE '%' || :str || '%'")
     suspend fun getSearchProduct(Id: Int, str: String): List<ProductMainItem>
-
-
-    //comment
-    @Insert
-    suspend fun insert(comment: Comment): Long
-
-    @Query("select ProductPrice.productPrice,ProductPrice.productDiscountRate,myOrder.orderDate,Product.coverImagePath,Product.productName,Product.productMinDeclaration,Product.UUID as productId,User.name,User.lastName,User.UUID as userId,myOrder.orderStatus,myOrder.UUID as orderId from `Order`as myOrder inner join ProductPrice on Product.UUID=ProductPrice.product inner join Product on Product.UUID=myOrder.product inner join User on User.UUID=myOrder.user where orderStatus=3 and myOrder.user=:Id and  Product.productName LIKE '%' || :str || '%'")
-    suspend fun getCommentableProduct(Id: Int, str: String): List<CommentProductModel>
-
-    @Query("select ProductPrice.productPrice,ProductPrice.productDiscountRate,myOrder.orderDate,Product.coverImagePath,Product.productName,Product.productMinDeclaration,Product.UUID as productId,User.name,User.lastName,User.UUID as userId,myOrder.orderStatus,myOrder.UUID as orderId from `Order`as myOrder inner join ProductPrice on Product.UUID=ProductPrice.product inner join Product on Product.UUID=myOrder.product inner join User on User.UUID=myOrder.user where orderStatus=3 and myOrder.user=:Id and  Product.UUID=:productId")
-    suspend fun getCommentableProduct(Id: Int, productId: Int): CommentProductModel
-    //comment
-
-    //like
-    @Query("select * from 'Like' as myLike where myLike.product=:ProductId and myLike.user=:UserId")
-    suspend fun isLike(ProductId: Int, UserId: Int): List<Like>
-
-    @Insert
-    suspend fun addLike(like: Like): Long
-
-    @Query("SELECT count(*) FROM 'Like' where product=:Id")
-    suspend fun getProductLikeCountById(Id: Int): Int
-
-    @Query("DELETE FROM 'Like' as myLike WHERE myLike.Product=:ProductId and myLike.User=:UserId")
-    suspend fun removeLike(ProductId: Int, UserId: Int)
-    //like
-
 
     @Query("select Product.productName ,Product.productMinDeclaration,Product.UUID ,quantity,ProductPrice.productPrice,ProductPrice.productDiscountRate,finishDate,startDate,coverImagePath,(select UUID from `Like` as myLike where myLike.product=Product.UUID and  myLike.user=:Id ) as isLike from Product inner join ProductPrice on Product.UUID=ProductPrice.product where Product.productCategory=:Id")
     suspend fun getCategoryProduct(Id: Int): List<ProductMainItem>
@@ -76,17 +48,6 @@ interface ProductDao {
     @Query("SELECT Product.productName,(select UUID from `Like` as myLike where myLike.product=Product.UUID and myLike.product=:Id and myLike.user=:userId) as isLike,Product.productMinDeclaration,Product.UUID,Product.declaration,myUser.name, myUser.lastName ,ProductPrice.productDiscountRate,ProductPrice.productPrice,ProductPrice.finishDate FROM Product  inner join ProductPrice on Product.UUID=ProductPrice.product inner join User as myUser on myUser.UUID=Product.UUID where Product.UUID=:Id")
     suspend fun getProductDetailById(Id: Int, userId: Int): DetailProductModel
 
-    @Query("SELECT * FROM Comment inner join Score on Comment.user=Score.user  and Comment.product=Score.product   inner join User as user on user.UUID=Score.user where Comment.product=:Id order by Comment.UUID desc limit 10")
-    suspend fun getProductCommentLastById(Id: Int): List<CommentDetailModel>
-
-
-    //score
-    @Query("SELECT AVG(scorePoint) FROM 'Score' where product=:Id")
-    suspend fun getProductScoreCountById(Id: Int): Double
-    @Insert
-    suspend fun insert(score: Score): Long
-
-    //score
     @Query("SELECT * FROM Product where productCategory=:Id")
     suspend fun allProductByCategoryId(Id: Int): List<Product>
 

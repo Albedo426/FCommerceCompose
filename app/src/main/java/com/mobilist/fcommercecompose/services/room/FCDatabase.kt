@@ -19,6 +19,8 @@ import com.mobilist.fcommercecompose.data.entity.shopping_list.Order
 import com.mobilist.fcommercecompose.data.entity.shopping_list.OrderStatus
 import com.mobilist.fcommercecompose.data.entity.user.*
 import com.mobilist.fcommercecompose.services.room.category_api.CategoryDao
+import com.mobilist.fcommercecompose.services.room.comment_api.CommentDao
+import com.mobilist.fcommercecompose.services.room.favorite_api.LikeDao
 import com.mobilist.fcommercecompose.services.room.order_api.OrderDao
 import com.mobilist.fcommercecompose.services.room.product_api.ProductDao
 import com.mobilist.fcommercecompose.services.room.user_api.UserDao
@@ -37,4 +39,6 @@ abstract class FCDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
     abstract fun orderDao(): OrderDao
     abstract fun categoryDao(): CategoryDao
+    abstract fun commentDao(): CommentDao
+    abstract fun likeDao(): LikeDao
 }

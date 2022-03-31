@@ -8,6 +8,8 @@ import com.mobilist.fcommercecompose.base.BaseViewModel
 import com.mobilist.fcommercecompose.controller.product.image.ImageController
 import com.mobilist.fcommercecompose.controller.product.order.OrderController
 import com.mobilist.fcommercecompose.data.model.*
+import com.mobilist.fcommercecompose.services.repo.comment.CommentRepositoryImpl
+import com.mobilist.fcommercecompose.services.repo.favorite.FavoriteRepositoryImpl
 import com.mobilist.fcommercecompose.services.repo.product.ProductRepositoryImpl
 import com.mobilist.fcommercecompose.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +21,9 @@ class ProductDetailViewModel @Inject constructor(
     private var orderController: OrderController,
     private var customSharedPreferences: CustomSharedPreferences,
     private var imageController: ImageController,
-    private var productRepositoryImpl: ProductRepositoryImpl
+    private var favoriteRepositoryImpl: FavoriteRepositoryImpl,
+    private var productRepositoryImpl: ProductRepositoryImpl,
+    private var commentRepositoryImpl: CommentRepositoryImpl
 ) : BaseViewModel(application) {
 
 
@@ -80,7 +84,7 @@ class ProductDetailViewModel @Inject constructor(
     private fun loadComment(Id:Int){
         isLoading.value=true
         launch {
-            when(val result=productRepositoryImpl.getProductCommentLastById(Id)){//değişecek deinamik olucak
+            when(val result=commentRepositoryImpl.getProductCommentLastById(Id)){//değişecek deinamik olucak
                 is Resource.Success->{
                     comments.value=result.data!!
                     errorMessage.value=""
@@ -127,7 +131,7 @@ class ProductDetailViewModel @Inject constructor(
     private fun loadLikeCount(Id:Int){
         isLoading.value=true
         launch {
-            when(val result=productRepositoryImpl.getProductLikeCountById(Id)){//değişecek deinamik olucak
+            when(val result=favoriteRepositoryImpl.getProductLikeCountById(Id)){//değişecek deinamik olucak
                 is Resource.Success->{
                     likeCount.value=result.data!!
                     errorMessage.value=""
