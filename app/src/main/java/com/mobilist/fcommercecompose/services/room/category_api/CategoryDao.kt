@@ -22,6 +22,9 @@ interface CategoryDao : BaseDao<Category> {
     @Query("select * from Category where mainCategory=0 and lowerMainCategory=:Id ")
     suspend fun getCategoriesLowerSimpleProduct(Id: Int): List<Category>
 
+    @Query("select * from Category where mainCategory=0 and lowerMainCategory!=0 ")
+    suspend fun getCategoriesLowerProduct(): List<Category>
+
     @Query("select * from Category where mainCategory=0  and  lowerMainCategory=:Id  and name LIKE '%' || :str || '%'")
     suspend fun searchCategoriesLowerSimpleProduct(Id: Int, str: String): List<Category>
 }

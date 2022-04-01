@@ -10,4 +10,5 @@ interface CategoryRepository {
     suspend fun searchCategoriesLowerMainProduct(Id: Int, str: String): Resource<List<Category>>
     suspend fun getCategoriesLowerSimpleProduct(Id: Int): Resource<List<Category>>
     suspend fun searchCategoriesLowerSimpleProduct(Id: Int, str: String): Resource<List<Category>>
+    suspend fun getCategoriesLowerProduct(): Resource<List<Category>>
 }

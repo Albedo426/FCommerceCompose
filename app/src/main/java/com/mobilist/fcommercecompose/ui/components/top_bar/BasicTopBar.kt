@@ -24,17 +24,15 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.mobilist.fcommercecompose.R
 import com.mobilist.fcommercecompose.data.model.SearchWidgetState
-import com.mobilist.fcommercecompose.ui.theme.text_color
 
 @Composable
-fun BasicTopBar(title:String=stringResource(R.string.app_name)) {
+fun BasicTopBar(title: String = stringResource(R.string.app_name)) {
     TopAppBar(
-        title = { Text(text =title, fontSize = 18.sp) },
+        title = { Text(text = title, fontSize = 18.sp) },
         backgroundColor = colorResource(id = R.color.mainBlue),
         contentColor = Color.White
     )
 }
-
 
 @Composable
 fun SearchTopBar(
@@ -50,14 +48,15 @@ fun SearchTopBar(
 ) {
     when (searchWidgetState) {
         SearchWidgetState.CLOSED -> {
-            DefaultAppBar(navController,
-                title=title,
+            DefaultAppBar(
+                navController,
+                title = title,
                 onSearchClicked = onSearchTriggered
             )
         }
         SearchWidgetState.OPENED -> {
             SearchAppBar(
-                textSearch=textSearch,
+                textSearch = textSearch,
                 text = searchTextState,
                 onTextChange = onTextChange,
                 onCloseClicked = onCloseClicked,
@@ -68,12 +67,12 @@ fun SearchTopBar(
 }
 
 @Composable
-fun DefaultAppBar(navController: NavController= rememberNavController(), title:String, onSearchClicked: () -> Unit) {
+fun DefaultAppBar(navController: NavController = rememberNavController(), title: String, onSearchClicked: () -> Unit) {
     TopAppBar(
-        backgroundColor=colorResource(R.color.mainBlue),
+        backgroundColor = colorResource(R.color.mainBlue),
         title = {
             Text(
-                text =title,color=Color.White
+                text = title, color = Color.White
             )
         },
         navigationIcon = if (navController.previousBackStackEntry != null) {
@@ -105,7 +104,7 @@ fun DefaultAppBar(navController: NavController= rememberNavController(), title:S
 
 @Composable
 fun SearchAppBar(
-    textSearch:String,
+    textSearch: String,
     text: String,
     onTextChange: (String) -> Unit,
     onCloseClicked: () -> Unit,
@@ -116,10 +115,11 @@ fun SearchAppBar(
             .fillMaxWidth()
             .height(56.dp),
         elevation = AppBarDefaults.TopAppBarElevation,
-        color=colorResource(R.color.mainBlue),
+        color = colorResource(R.color.mainBlue),
     ) {
-        TextField(modifier = Modifier
-            .fillMaxWidth(),
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth(),
             value = text,
             onValueChange = {
                 onTextChange(it)
@@ -176,8 +176,9 @@ fun SearchAppBar(
             ),
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = Color.Transparent,
-                textColor= Color.White,
+                textColor = Color.White,
                 cursorColor = Color.White.copy(alpha = ContentAlpha.medium)
-            ))
+            )
+        )
     }
 }

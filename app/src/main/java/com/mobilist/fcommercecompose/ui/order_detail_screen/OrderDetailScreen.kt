@@ -3,7 +3,6 @@ package com.mobilist.fcommercecompose.ui.order_detail_screen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -46,7 +45,7 @@ fun OrderDetailScreen(
 @Composable
 fun OrderDetailContents(
     navController: NavController,
-    viewModel: OrderDetailViewModel = hiltViewModel()
+    viewModel: OrderDetailViewModel
 ) {
     val allPrice by remember { viewModel.allPrice }
     var shipAddressId by remember { viewModel.shipAddressId }

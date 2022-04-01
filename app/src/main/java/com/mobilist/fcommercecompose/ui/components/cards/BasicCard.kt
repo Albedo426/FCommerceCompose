@@ -2,6 +2,7 @@ package com.mobilist.fcommercecompose.ui.components.cards
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,6 +10,7 @@ import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -21,14 +23,61 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.compose.rememberImagePainter
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import com.mobilist.fcommercecompose.data.model.DetailProductModel
+import com.mobilist.fcommercecompose.data.model.MyOrderStatusResponseModel
 import com.mobilist.fcommercecompose.data.model.ProductMainItemModel
+import com.mobilist.fcommercecompose.data.model.RequestOrderModel
 import com.mobilist.fcommercecompose.ui.components.button.MyLikeButton
+import com.mobilist.fcommercecompose.ui.components.line_component.MySpacerHorizontal
+import com.mobilist.fcommercecompose.ui.components.text.StateOrderEnum
+import com.mobilist.fcommercecompose.ui.components.text.TextMultiMore
+import com.mobilist.fcommercecompose.ui.components.text.Title
 import com.mobilist.fcommercecompose.ui.home_screen.home_product_screen.component.list_view.ItemProductHome
 import com.mobilist.fcommercecompose.ui.product_detail.components.detail_images.MyHorizontalPager
 import com.mobilist.fcommercecompose.ui.product_detail.components.rading_bar.DotsIndicator
+
+@Composable
+fun MyOrderItemDefault(order: RequestOrderModel, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier.padding(5.dp),
+        shape = RoundedCornerShape(5),
+        backgroundColor = Color.White,
+    ) {
+        Column(
+            modifier = Modifier.padding(5.dp)
+        ) {
+            Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                Title(mainText = order.productName, "Detaylar") {
+                    onClick()
+                }
+            }
+            MySpacerHorizontal()
+            Column(Modifier.fillMaxHeight()) {
+                Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                    Image(
+                        rememberImagePainter(data = order.coverImagePath),
+                        modifier = Modifier
+                            .width(120.dp)
+                            .height(120.dp),
+                        contentDescription = "",
+                    )
+                    Column(Modifier.padding(10.dp)) {
+                        Text(
+                            text = "Sipariş tarihi: ${order.orderDate}",
+                            modifier = Modifier.padding(5.dp)
+                        )
+                        StateOrderEnum(order.orderStatus) {
+                            Text(text = "Ürün Durumu: $it", modifier = Modifier.padding(5.dp))
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 @Composable
 fun BasicCard(
@@ -51,7 +100,6 @@ fun BasicCard(
         }
     }
 }
-
 
 @Composable
 fun ClickableCategoryCard(
@@ -130,4 +178,34 @@ fun ImagePager(state: PagerState, data: List<String>, product: DetailProductMode
             isLike, product.UUID
         )
     }
+}
+
+@Composable
+fun OrderItemDetailAttr(order: MyOrderStatusResponseModel) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        TextMultiMore(
+            "Sipariş tarihi: ${order.orderDate}",
+            "${order.name} ${order.lastName}"
+        )
+    }
+    TextMultiMore(
+        "Sipariş No: ${(order.UUID + 10000)}",
+        "Sipariş Adresi : ${order.shipAddress }",
+        "Fatura Adresi : ${order.billAddress }"
+    )
+
+    if (order.trackingNumber != "" && order.cargoName != "") {
+        TextMultiMore(
+            "Kargo Adı : ${order.cargoName }",
+            "Kargo Adı : ${order.cargoName }"
+        )
+    }
+    Text(
+        text = "Kalan Ürün Sayısı: ${order.quantity}",
+        modifier = Modifier.padding(bottom = 5.dp)
+    )
 }

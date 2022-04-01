@@ -3,6 +3,7 @@ package com.mobilist.fcommercecompose.services.repo.product
 import com.mobilist.fcommercecompose.data.entity.product.Product
 import com.mobilist.fcommercecompose.data.entity.product.ProductImage
 import com.mobilist.fcommercecompose.data.entity.product.ProductMainItem
+import com.mobilist.fcommercecompose.data.entity.product.ProductPrice
 import com.mobilist.fcommercecompose.data.model.*
 import com.mobilist.fcommercecompose.util.Resource
 
@@ -17,8 +18,12 @@ interface ProductRepository {
     suspend fun getProductById(Id: Int): Resource<Product>
     suspend fun getProductDetailById(Id: Int, userId: Int): Resource<DetailProductModel>
     suspend fun getProductScoreCountById(Id: Int): Resource<Double>
-
-    suspend fun insert(product: Product): Long
+    suspend fun insertProductFull(
+        product: Product,
+        productPrice: ProductPrice,
+        ImagePath: Array<String>
+    ): Resource<Boolean>
+    suspend fun insert(product: Product)
     suspend fun getAllProduct(): Resource<List<Product>>
     suspend fun insertAll(vararg users: Product): List<Long>
     suspend fun allProductByCategoryId(Id: Int): List<Product>

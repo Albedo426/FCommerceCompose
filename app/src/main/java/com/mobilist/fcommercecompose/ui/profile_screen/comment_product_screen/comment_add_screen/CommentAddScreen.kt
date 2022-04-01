@@ -3,15 +3,12 @@ package com.mobilist.fcommercecompose.ui.profile_screen.comment_product_screen.c
 import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -31,11 +28,10 @@ import com.mobilist.fcommercecompose.R
 import com.mobilist.fcommercecompose.data.model.CommentProductModel
 import com.mobilist.fcommercecompose.ui.components.button.BasicButton
 import com.mobilist.fcommercecompose.ui.components.dialog.CustomDialog
-import com.mobilist.fcommercecompose.ui.order_screen.component.OrderItem
+import com.mobilist.fcommercecompose.ui.components.error_components.ErrorControllerErrorOnlyTextComponent
 import com.mobilist.fcommercecompose.ui.product_detail.components.rading_bar.RatingBar
-import com.mobilist.fcommercecompose.ui.profile_screen.comment_product_screen.CommentProductViewModel
+import com.mobilist.fcommercecompose.ui.profile_screen.comment_product_screen.component.ProductCommentItem
 import com.mobilist.fcommercecompose.util.percentage
-
 
 @ExperimentalComposeUiApi
 @SuppressLint("RememberReturnType")
@@ -53,35 +49,37 @@ fun CommentAddScreen(
     val error by remember { viewModel.errorMessage }
     val loading by remember { viewModel.isLoading }
     val openDialog = remember { mutableStateOf(false) }
-
-    Column(Modifier.fillMaxSize()) {
-        Column(
-            Modifier
-                .weight(0.1f)
-                .padding(bottom = 50.dp)) {
-            MainCommentAdd(navController = navController, item = data)
-            AddedCommentComp(openDialog=openDialog, viewModel = viewModel)
+    ErrorControllerErrorOnlyTextComponent(loading, error) {
+        Column(Modifier.fillMaxSize()) {
+            Column(
+                Modifier
+                    .weight(0.1f)
+                    .padding(bottom = 50.dp)
+            ) {
+                MainCommentAdd(navController = navController, item = data)
+                AddedCommentComp(openDialog = openDialog, viewModel = viewModel)
+            }
         }
     }
     if (openDialog.value) {
         // openDialog, openDialog, editMessage
-        CustomDialog(openDialog= openDialog ,text="Yorum GÖnderildi", acceptText = "Tamam", Image = R.drawable.ic_baseline_success_24 ){
+        CustomDialog(openDialog = openDialog, text = "Yorum Gönderildi", acceptText = "Tamam", Image = R.drawable.ic_baseline_success_24) {
             navController.navigateUp()
         }
     }
-
 }
 
 @Composable
 fun MainCommentAdd(navController: NavController, item: CommentProductModel) {
     val circleInt = remember { 5 }
     Card(
-        shape = RoundedCornerShape(circleInt), modifier = Modifier
+        shape = RoundedCornerShape(circleInt),
+        modifier = Modifier
             .padding(10.dp)
     ) {
         Row(
             modifier = Modifier
-            //.background(color = Color.DarkGray)
+            // .background(color = Color.DarkGray)
         ) {
             Image(
                 contentScale = ContentScale.Crop,
@@ -153,12 +151,13 @@ fun MainCommentAdd(navController: NavController, item: CommentProductModel) {
 
 @ExperimentalComposeUiApi
 @Composable
-fun AddedCommentComp(openDialog:MutableState<Boolean>, viewModel: CommentAddViewModel) {
+fun AddedCommentComp(openDialog: MutableState<Boolean>, viewModel: CommentAddViewModel) {
     val circleInt = remember { 5 }
     var point by remember { viewModel.point }
     var text by remember { viewModel.text }
     Card(
-        shape = RoundedCornerShape(circleInt), modifier = Modifier
+        shape = RoundedCornerShape(circleInt),
+        modifier = Modifier
             .padding(10.dp)
     ) {
         Column(
@@ -166,16 +165,16 @@ fun AddedCommentComp(openDialog:MutableState<Boolean>, viewModel: CommentAddView
             modifier = Modifier.fillMaxSize(),
 
         ) {
-            Column( modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally){
-                Text(text = "Aldığınız Ürünü Aşşağıdan Puanlandırabilirsiniz",Modifier.padding(5.dp))
+            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = "Aldığınız Ürünü Aşşağıdan Puanlandırabilirsiniz", Modifier.padding(5.dp))
                 RatingBar(rating = point, animateStartSize = 35, animateFinishSize = 30) {
-                    point=it
+                    point = it
                 }
                 OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight =  300.dp).padding(8.dp),
-                    maxLines=8,
+                    modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 300.dp).padding(8.dp),
+                    maxLines = 8,
                     value = text,
-                    onValueChange = { text=it},
+                    onValueChange = { text = it },
                     label = { Text("Ürün Yorumu") }
                 )
             }
@@ -183,14 +182,14 @@ fun AddedCommentComp(openDialog:MutableState<Boolean>, viewModel: CommentAddView
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 BasicButton(
-                    text = "Yorumunu Paylaş",modifier = Modifier
+                    text = "Yorumunu Paylaş",
+                    modifier = Modifier
                         .padding(8.dp)
-                        .fillMaxWidth()){
+                        .fillMaxWidth()
+                ) {
                     viewModel.addComment(openDialog)
                 }
             }
         }
-
-
     }
 }

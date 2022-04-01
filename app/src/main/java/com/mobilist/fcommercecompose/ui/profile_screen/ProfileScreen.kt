@@ -1,21 +1,15 @@
 package com.mobilist.fcommercecompose.ui.profile_screen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -26,15 +20,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.mobilist.fcommercecompose.R
 import com.mobilist.fcommercecompose.ui.categories_screen.category_product.CategoryProductScreen
 import com.mobilist.fcommercecompose.ui.categories_screen.lower_main_category.LowerMainCategoryScreen
 import com.mobilist.fcommercecompose.ui.categories_screen.lower_simple_category.LowerSimpleCategoryScreen
 import com.mobilist.fcommercecompose.ui.components.error_components.ErrorControllerErrorOnlyTextComponent
-import com.mobilist.fcommercecompose.ui.components.error_components.ErrorOnlyTextComponent
 import com.mobilist.fcommercecompose.ui.components.top_bar.BasicTopBar
-import com.mobilist.fcommercecompose.ui.order_screen.component.OrderItem
-import com.mobilist.fcommercecompose.ui.product_detail.Content
+import com.mobilist.fcommercecompose.ui.profile_screen.product_new.ProductNewAddScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.address_change_screen.AddressChangeScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.address_change_screen.address_add_screen.AddressAddScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.comment_product_screen.CommentProductScreen
@@ -59,6 +50,9 @@ fun ProfileScreen(
     NavHost(navController, startDestination = "profile_screen") {
         composable("profile_screen") {
             MyProfileScreen(navController, navControllerMain)
+        }
+        composable("product_new_add_screen") {
+            ProductNewAddScreen(navController)
         }
         composable("comment_product_screen") {
             CommentProductScreen(navController)

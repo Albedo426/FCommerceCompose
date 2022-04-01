@@ -22,7 +22,7 @@ class LoginViewModel @Inject constructor(
     init {
         // ilk yüklendiğinde çalışmıyor
         launch {
-            if (customSharedPreferences.getReadyDataToken() != 0) {
+            if (customSharedPreferences.getReadyDataToken() == 0) {
                 userRepositoryImpl.init()
                 customSharedPreferences.addDataToken()
             }

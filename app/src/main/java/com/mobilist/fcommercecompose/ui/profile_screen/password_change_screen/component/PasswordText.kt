@@ -12,7 +12,6 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -32,15 +31,15 @@ fun TextPasswordOutlined(
 
     OutlinedTextField(
         value = password,
-        onValueChange = { password = it;textChange(password) },
+        onValueChange = { password = it; textChange(password) },
         maxLines = 1,
         singleLine = true,
         // label = { Text(text,color = colorResource(R.color.text_color)) },
-        label = { Text(text,  color = colorResource(R.color.text_colorDark)) },
+        label = { Text(text, color = colorResource(R.color.text_colorDark)) },
         modifier = modifier
             .fillMaxWidth()
             .padding(5.dp),
-        shape = RoundedCornerShape(border),//50
+        shape = RoundedCornerShape(border), // 50
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = colorResource(R.color.mainBlue),
             unfocusedBorderColor = colorResource(R.color.mainBlue)

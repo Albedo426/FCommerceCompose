@@ -8,7 +8,7 @@ import androidx.core.content.edit
 class CustomSharedPreferences {
     companion object {
         private const val PREFERENCES_Id = "MyId"
-        private const val PREFERENCES_Init = "MyId"
+        private const val PREFERENCES_Init = "Token"
         private var sharedPreferences: SharedPreferences? = null
         @Volatile private var instance: CustomSharedPreferences? = null
         private val lock = Any()

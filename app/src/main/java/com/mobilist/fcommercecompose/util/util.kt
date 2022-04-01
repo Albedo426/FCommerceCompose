@@ -13,9 +13,7 @@ fun NavOptionsBuilder.popUpToTop(navController: NavController) {
 }
 
 fun String.getNowTimeString(): String {
-    val order = OrderModel()
     val current = LocalDateTime.now()
-
     val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
     return current.format(formatter)
 }

@@ -3,14 +3,12 @@ package com.mobilist.fcommercecompose.ui.profile_screen.component
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.mobilist.fcommercecompose.R
-import com.mobilist.fcommercecompose.ui.main_screen.bottom_navigate_bar.NavigationItem
 import com.mobilist.fcommercecompose.ui.profile_screen.ProfileViewModel
 
 @Composable
@@ -26,10 +24,9 @@ fun AccountMenu(navController: NavHostController, navControllerMain: NavControll
         navController.navigate("comment_product_screen")
     }
     AccountMenuItem("Ürün Ekle", R.drawable.ic_baseline_add_box_24) {
-
+        navController.navigate("product_new_add_screen")
     }
     AccountMenuItem("Mesajlar", R.drawable.ic_baseline_chat_24) {
-
     }
     AccountMenuItem("Kullanıcı Bilgileri", R.drawable.ic_baseline_account_circle_24) {
         navController.navigate("user_change_screen")
@@ -39,7 +36,6 @@ fun AccountMenu(navController: NavHostController, navControllerMain: NavControll
     }
     AccountMenuItem("E-Posta Değişikliği", R.drawable.ic_baseline_mail_outline_24) {
         navController.navigate("mail_change_screen")
-
     }
     AccountMenuItem("Şifre Değişikliği", R.drawable.ic_baseline_lock_24) {
         navController.navigate("password_change_screen")
@@ -49,11 +45,9 @@ fun AccountMenu(navController: NavHostController, navControllerMain: NavControll
     }
 }
 
-
-
 @Composable
-fun  SimpleAlertDialog(myOpenDialog:Boolean,onClick: (Boolean) -> Unit) {
-    val openDialog = remember { mutableStateOf(myOpenDialog)  }
+fun SimpleAlertDialog(myOpenDialog: Boolean, onClick: (Boolean) -> Unit) {
+    val openDialog = remember { mutableStateOf(myOpenDialog) }
     AlertDialog(
         onDismissRequest = {
             openDialog.value = false
@@ -68,7 +62,8 @@ fun  SimpleAlertDialog(myOpenDialog:Boolean,onClick: (Boolean) -> Unit) {
             Button(
                 onClick = {
                     openDialog.value = false
-                }) {
+                }
+            ) {
                 Text("Evet")
             }
         },
@@ -76,7 +71,8 @@ fun  SimpleAlertDialog(myOpenDialog:Boolean,onClick: (Boolean) -> Unit) {
             Button(
                 onClick = {
                     openDialog.value = false
-                }) {
+                }
+            ) {
                 Text("hayır")
             }
         }

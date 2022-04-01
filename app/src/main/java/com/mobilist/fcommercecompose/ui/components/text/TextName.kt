@@ -20,10 +20,11 @@ import com.mobilist.fcommercecompose.R
 fun TextName(
     modifier: Modifier,
     text: String,
+    myName: String = "",
     border: Int = 25,
     textChange: (String) -> Unit = {}
 ) {
-    var name by rememberSaveable { mutableStateOf("") }
+    var name by rememberSaveable { mutableStateOf(myName) }
     TextField(
         value = name,
         maxLines = 1,

@@ -46,6 +46,13 @@ class CategoryRepositoryImpl @Inject constructor(private val categoryDao: Catego
             Resource.Error(e.message!!)
         }
     }
+    override suspend fun getCategoriesLowerProduct(): Resource<List<Category>> {
+        return try {
+            listControl(categoryDao.getCategoriesLowerProduct())
+        } catch (e: Exception) {
+            Resource.Error(e.message!!)
+        }
+    }
     override suspend fun searchCategoriesLowerSimpleProduct(Id: Int, str: String): Resource<List<Category>> {
         return try {
             listControl(categoryDao.searchCategoriesLowerSimpleProduct(Id, str))

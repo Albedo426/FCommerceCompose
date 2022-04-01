@@ -18,6 +18,7 @@ import com.mobilist.fcommercecompose.data.entity.sales.Cart
 import com.mobilist.fcommercecompose.data.entity.shopping_list.Order
 import com.mobilist.fcommercecompose.data.entity.shopping_list.OrderStatus
 import com.mobilist.fcommercecompose.data.entity.user.*
+import com.mobilist.fcommercecompose.services.room.brand_api.BrandDao
 import com.mobilist.fcommercecompose.services.room.category_api.CategoryDao
 import com.mobilist.fcommercecompose.services.room.comment_api.CommentDao
 import com.mobilist.fcommercecompose.services.room.favorite_api.LikeDao
@@ -32,7 +33,7 @@ import com.mobilist.fcommercecompose.services.room.user_api.UserDao
         Brand::class, Category::class, Product::class, ProductImage::class, ProductPrice::class,
         Chat::class, Comment::class, Like::class, Score::class, ChatImage::class, CommentImage::class, Order::class, OrderStatus::class
     ],
-    version = 5
+    version = 7
 )
 abstract class FCDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
@@ -41,4 +42,5 @@ abstract class FCDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
     abstract fun commentDao(): CommentDao
     abstract fun likeDao(): LikeDao
+    abstract fun brandDao(): BrandDao
 }

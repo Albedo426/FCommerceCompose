@@ -3,6 +3,7 @@ package com.mobilist.fcommercecompose.services.repo.product
 import com.mobilist.fcommercecompose.data.entity.product.Product
 import com.mobilist.fcommercecompose.data.entity.product.ProductImage
 import com.mobilist.fcommercecompose.data.entity.product.ProductMainItem
+import com.mobilist.fcommercecompose.data.entity.product.ProductPrice
 import com.mobilist.fcommercecompose.data.model.* // ktlint-disable no-wildcard-imports
 import com.mobilist.fcommercecompose.services.room.product_api.ProductDao
 import com.mobilist.fcommercecompose.util.Resource
@@ -12,12 +13,34 @@ import javax.inject.Inject
 class ProductRepositoryImpl @Inject constructor(private val productDao: ProductDao) :
     ProductRepository {
 
-    override suspend fun insert(product: Product): Long {
-        return productDao.insert(product)
+    override suspend fun insert(product: Product) {
+        productDao.insert(product)
     }
+
+    override suspend fun insertProductFull(
+        product: Product,
+        productPrice: ProductPrice,
+        ImagePath: Array<String>
+    ): Resource<Boolean> {
+        return try {
+            productDao.insert(product)
+            var prod = productDao.getProductLast()
+            productPrice.product = prod.UUID
+            productDao.insert(productPrice)
+
+            ImagePath.forEach {
+                productDao.insert(ProductImage(it, prod.UUID))
+            }
+            return Resource.Success(true)
+        } catch (e: Exception) {
+            Resource.Error(e.message!!)
+        }
+    }
+
     override suspend fun insertAll(vararg users: Product): List<Long> {
         return productDao.insertAllProduct(*users)
     }
+
     // maplama yap ad değiştir get main product tarzı olsun prodcutmainitemmodele dönüşsün veriler map ile
     override suspend fun getAllProduct(): Resource<List<Product>> {
         return try {
@@ -45,6 +68,7 @@ class ProductRepositoryImpl @Inject constructor(private val productDao: ProductD
             Resource.Error(e.message!!)
         }
     }
+
     override suspend fun getProductDetailById(Id: Int, userId: Int): Resource<DetailProductModel> {
         return try {
             val resource = productDao.getProductDetailById(Id, userId)
@@ -57,6 +81,7 @@ class ProductRepositoryImpl @Inject constructor(private val productDao: ProductD
             Resource.Error(e.message!!)
         }
     }
+
     override suspend fun getProductById(Id: Int): Resource<Product> {
         return try {
             Resource.Success(productDao.getProductById(Id))
@@ -126,7 +151,11 @@ class ProductRepositoryImpl @Inject constructor(private val productDao: ProductD
             Resource.Error(e.message!!)
         }
     }
-    override suspend fun getSearchFavoriteProduct(Id: Int, str: String): Resource<List<ProductMainItem>> {
+
+    override suspend fun getSearchFavoriteProduct(
+        Id: Int,
+        str: String
+    ): Resource<List<ProductMainItem>> {
         return try {
             val resource = productDao.getSearchFavoriteProduct(Id, str)
             if (resource.isEmpty()) {
@@ -151,7 +180,11 @@ class ProductRepositoryImpl @Inject constructor(private val productDao: ProductD
             Resource.Error(e.message!!)
         }
     }
-    override suspend fun getSearchCategoryProduct(Id: Int, str: String): Resource<List<ProductMainItem>> {
+
+    override suspend fun getSearchCategoryProduct(
+        Id: Int,
+        str: String
+    ): Resource<List<ProductMainItem>> {
         return try {
             val resource = productDao.getSearchCategoryProduct(Id, str)
             if (resource.isEmpty()) {

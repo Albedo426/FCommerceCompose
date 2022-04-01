@@ -22,4 +22,6 @@ abstract class BaseViewModel(application: Application) :
         super.onCleared()
         job.cancel()
     }
+
+
 }

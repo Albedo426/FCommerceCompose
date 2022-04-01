@@ -13,14 +13,21 @@ import androidx.compose.ui.text.font.FontWeight
 import com.mobilist.fcommercecompose.R
 
 @Composable
-fun Title(mainText:String,secText:String="", onClick: (String) -> Unit = {}) {
-    Row(modifier= Modifier
-        .fillMaxWidth(),horizontalArrangement = Arrangement.SpaceBetween) {
-        Text(mainText, fontWeight = FontWeight.W700,color = colorResource(id = R.color.text_colorDark))
-        if(secText!=""){
-            Text(secText, modifier= Modifier
-                .alpha(0.5f)
-                .clickable { onClick(secText) },color = colorResource(id = R.color.text_colorDark))
+fun Title(mainText: String, secText: String = "", onClick: (String) -> Unit = {}) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(mainText, fontWeight = FontWeight.W700, color = colorResource(id = R.color.text_colorDark))
+        if (secText != "") {
+            Text(
+                secText,
+                modifier = Modifier
+                    .alpha(0.5f)
+                    .clickable { onClick(secText) },
+                color = colorResource(id = R.color.text_colorDark)
+            )
         }
     }
 }

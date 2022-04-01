@@ -7,7 +7,6 @@ import androidx.compose.runtime.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mobilist.fcommercecompose.ui.components.cards.ProductListView
-import com.mobilist.fcommercecompose.ui.components.error_components.ErrorBasicComponent
 import com.mobilist.fcommercecompose.ui.components.error_components.ErrorControllerBasicComponent
 import com.mobilist.fcommercecompose.ui.components.top_bar.DefaultAppBar
 
@@ -33,7 +32,7 @@ fun HomeProductScreen(
                 navControllerMain.navigate("search_product_screen")
             },
         )
-        ErrorControllerBasicComponent(loading, error, onClick = {   viewModel.loadList()}) {
+        ErrorControllerBasicComponent(loading, error, onClick = { viewModel.loadList() }) {
             ProductListView(data, navControllerMain)
         }
     }

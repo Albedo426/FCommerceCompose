@@ -1,6 +1,5 @@
 package com.mobilist.fcommercecompose.ui.splah_screen
 
-import android.window.SplashScreen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
@@ -19,13 +18,12 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.mobilist.fcommercecompose.R
-import com.mobilist.fcommercecompose.ui.login_screen.LoginViewModel
 
 @Composable
 fun SplashScreen(
     navController: NavController,
     splashViewModel: SplashViewModel = hiltViewModel(),
-){
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -42,23 +40,23 @@ fun SplashScreen(
         )
     }
 
-     //   LottieExample()
-        val myRouterController by remember{
-            mutableStateOf( splashViewModel.routerControl())
-        }
-        if(myRouterController){
-            navController.navigate("main_screen") {
-                popUpTo("splash_screen") {
-                    inclusive = true
-                }
-            }// main olucak
-        }else{
-            navController.navigate("login_screen"){
-                popUpTo("splash_screen") {
-                    inclusive = true
-                }
+    //   LottieExample()
+    val myRouterController by remember {
+        mutableStateOf(splashViewModel.routerControl())
+    }
+    if (myRouterController) {
+        navController.navigate("main_screen") {
+            popUpTo("splash_screen") {
+                inclusive = true
             }
         }
+    } else {
+        navController.navigate("login_screen") {
+            popUpTo("splash_screen") {
+                inclusive = true
+            }
+        }
+    }
 }
 
 @Composable

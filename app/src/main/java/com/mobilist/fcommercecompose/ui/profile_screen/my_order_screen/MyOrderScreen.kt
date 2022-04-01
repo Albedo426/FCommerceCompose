@@ -14,10 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mobilist.fcommercecompose.ui.components.error_components.ErrorControllerErrorOnlyTextComponent
-import com.mobilist.fcommercecompose.ui.components.error_components.ErrorOnlyTextComponent
-import com.mobilist.fcommercecompose.ui.profile_screen.incoming_order_screen.change_order_status_screen.MainContentChangeOrderStatusScreen
 import com.mobilist.fcommercecompose.ui.profile_screen.my_order_screen.component.OrderItem
-
 
 @SuppressLint("RememberReturnType")
 @Composable
@@ -25,21 +22,20 @@ fun MyOrderScreen(
     navController: NavController,
     viewModel: MyOrderViewModel = hiltViewModel(),
 ) {
-    remember{
+    remember {
         viewModel.loadShoppingList()
     }
-    val data by remember {viewModel.list}
-    val error by remember {viewModel.errorMessage}
-    val loading by remember {viewModel.isLoading}
-    Log.e("TAG",data.size.toString() )
+    val data by remember { viewModel.list }
+    val error by remember { viewModel.errorMessage }
+    val loading by remember { viewModel.isLoading }
+    Log.e("TAG", data.size.toString())
     Column(Modifier.fillMaxSize()) {
         ErrorControllerErrorOnlyTextComponent(loading, error) {
             LazyColumn(Modifier.weight(0.1f).padding(bottom = 60.dp)) {
                 items(data) {
-                    OrderItem(it,navController)
+                    OrderItem(it, navController)
                 }
             }
         }
     }
-
 }

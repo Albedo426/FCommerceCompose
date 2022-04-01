@@ -18,40 +18,42 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.mobilist.fcommercecompose.R
+import com.mobilist.fcommercecompose.data.model.KeyValueModel
 import com.mobilist.fcommercecompose.data.model.UserAddressModel
 
-
 @Composable
-fun DropDown(text:String, listAddress: MutableState<List<UserAddressModel>>, onRetry: (Int) -> Unit) {
+fun DropDown(text: String, listAddress: MutableState<List<UserAddressModel>>, onRetry: (Int) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
     var selectedText by remember { mutableStateOf("Adres Seçin") }
     var textfieldSize by remember { mutableStateOf(Size.Zero) }
     val icon = if (expanded)
-        Icons.Filled.ArrowDropUp //it requires androidx.compose.material:material-icons-extended
+        Icons.Filled.ArrowDropUp // it requires androidx.compose.material:material-icons-extended
     else
         Icons.Filled.ArrowDropDown
 
-    Column(modifier=Modifier.padding(top=5.dp)) {
+    Column(modifier = Modifier.padding(top = 5.dp)) {
         OutlinedTextField(
             value = selectedText,
             enabled = false,
             onValueChange = {
-                selectedText= it
+                selectedText = it
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .onGloballyPositioned { coordinates ->
-                    //This value is used to assign to the DropDown the same width
+                    // This value is used to assign to the DropDown the same width
                     textfieldSize = coordinates.size.toSize()
                 },
-            label = { Text(text ,color=colorResource(id = R.color.text_colorDark)) },
+            label = { Text(text, color = colorResource(id = R.color.text_colorDark)) },
             trailingIcon = {
-                Icon(icon,"contentDescription",
-                    Modifier.clickable { expanded = !expanded })
+                Icon(
+                    icon, "contentDescription",
+                    Modifier.clickable { expanded = !expanded }
+                )
             },
 
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor= colorResource(id = R.color.text_colorDark),
+                focusedBorderColor = colorResource(id = R.color.text_colorDark),
                 unfocusedBorderColor = colorResource(id = R.color.text_colorDark),
                 focusedLabelColor = colorResource(id = R.color.text_colorDark),
                 cursorColor = colorResource(id = R.color.text_colorDark),
@@ -63,7 +65,7 @@ fun DropDown(text:String, listAddress: MutableState<List<UserAddressModel>>, onR
             expanded = expanded,
             onDismissRequest = { expanded = false },
             modifier = Modifier
-                .width(with(LocalDensity.current){textfieldSize.width.toDp()})
+                .width(with(LocalDensity.current) { textfieldSize.width.toDp() })
         ) {
             listAddress.value.forEach { label ->
                 DropdownMenuItem(onClick = {
@@ -71,7 +73,7 @@ fun DropDown(text:String, listAddress: MutableState<List<UserAddressModel>>, onR
                     expanded = !expanded
                     selectedText = label.addressTitle
                 }) {
-                    Text(text = label.addressTitle )
+                    Text(text = label.addressTitle)
                 }
             }
         }
@@ -79,12 +81,12 @@ fun DropDown(text:String, listAddress: MutableState<List<UserAddressModel>>, onR
 }
 
 @Composable
-fun DropDownOnlyString(text:String,showString:String="Adres Seçin", listAddress: List<String>, onRetry: (String) -> Unit) {
+fun DropDownOnlyString(text: String, showString: String = "Adres Seçin", listAddress: List<String>, onRetry: (String) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
     var selectedText by remember { mutableStateOf(showString) }
     var textfieldSize by remember { mutableStateOf(Size.Zero) }
     val icon = if (expanded)
-        Icons.Filled.ArrowDropUp //it requires androidx.compose.material:material-icons-extended
+        Icons.Filled.ArrowDropUp // it requires androidx.compose.material:material-icons-extended
     else
         Icons.Filled.ArrowDropDown
 
@@ -93,25 +95,27 @@ fun DropDownOnlyString(text:String,showString:String="Adres Seçin", listAddress
             value = selectedText,
             enabled = false,
             onValueChange = {
-                selectedText= it
+                selectedText = it
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .onGloballyPositioned { coordinates ->
-                    //This value is used to assign to the DropDown the same width
+                    // This value is used to assign to the DropDown the same width
                     textfieldSize = coordinates.size.toSize()
                 },
             label = { Text(text) },
             trailingIcon = {
-                Icon(icon,"contentDescription",
-                    Modifier.clickable { expanded = !expanded })
+                Icon(
+                    icon, "contentDescription",
+                    Modifier.clickable { expanded = !expanded }
+                )
             }
         )
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
             modifier = Modifier
-                .width(with(LocalDensity.current){textfieldSize.width.toDp()})
+                .width(with(LocalDensity.current) { textfieldSize.width.toDp() })
         ) {
             listAddress.forEach { label ->
                 DropdownMenuItem(onClick = {
@@ -120,6 +124,57 @@ fun DropDownOnlyString(text:String,showString:String="Adres Seçin", listAddress
                     selectedText = label
                 }) {
                     Text(text = label)
+                }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun DropDownOnlyKeyValue(text: String, showString: String = "Adres Seçin", listAddress: List<KeyValueModel>, onRetry: (Int) -> Unit) {
+    var expanded by remember { mutableStateOf(false) }
+    var selectedText by remember { mutableStateOf(showString) }
+    var textfieldSize by remember { mutableStateOf(Size.Zero) }
+    val icon = if (expanded)
+        Icons.Filled.ArrowDropUp // it requires androidx.compose.material:material-icons-extended
+    else
+        Icons.Filled.ArrowDropDown
+
+    Column() {
+        OutlinedTextField(
+            value = selectedText,
+            enabled = false,
+            onValueChange = {
+                selectedText = it
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .onGloballyPositioned { coordinates ->
+                    // This value is used to assign to the DropDown the same width
+                    textfieldSize = coordinates.size.toSize()
+                },
+            label = { Text(text) },
+            trailingIcon = {
+                Icon(
+                    icon, "contentDescription",
+                    Modifier.clickable { expanded = !expanded }
+                )
+            }
+        )
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            modifier = Modifier
+                .width(with(LocalDensity.current) { textfieldSize.width.toDp() })
+        ) {
+            listAddress.forEach { label ->
+                DropdownMenuItem(onClick = {
+                    onRetry(label.indexId)
+                    expanded = !expanded
+                    selectedText = label.str
+                }) {
+                    Text(text =  label.str)
                 }
             }
         }
